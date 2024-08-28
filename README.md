@@ -1,4 +1,4 @@
-# Track Me
+# TrackMe
 
 A Flutter app
 
@@ -21,4 +21,4 @@ $ flutter run --flavor development --target lib/main_development.dart
 $ flutter run --flavor production --target lib/main_production.dart
 ```
 
-_\*Track Me works on iOS and Android._
+_\*TrackMe works on iOS and Android._

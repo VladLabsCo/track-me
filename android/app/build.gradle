@@ -80,12 +80,12 @@ android {
         production {
             dimension "default"
             applicationIdSuffix ""
-            manifestPlaceholders = [appName: "Track Me"]
+            manifestPlaceholders = [appName: "TrackMe"]
         }
         development {
             dimension "default"
             applicationIdSuffix ".dev"
-            manifestPlaceholders = [appName: "[DEV] Track Me"]
+            manifestPlaceholders = [appName: "[DEV] TrackMe"]
         }
     }
 
