@@ -36,11 +36,5 @@ class UserNotifier extends _$UserNotifier {
 
   Future<void> logIn(String name) async {
     await (await _getDiskStorage()).setString(diskNameKey, name);
-
-    state = User.logged(name);
-  }
-
-  Future<String> me() async {
-    return (await _getDiskStorage()).getString(diskNameKey)!;
   }
 }

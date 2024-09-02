@@ -23,24 +23,27 @@ class Login extends StatelessWidget {
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 2,
-              child: const Column(
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(height: 10),
-                  Text(
+                  const SizedBox(height: 10),
+                  const Text(
                     'TrackMe',
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
+                  const Text(
                     'Insert your name to start',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 22),
                   ),
-                  SizedBox(height: 30),
-                  LoginForm(),
+                  const SizedBox(height: 30),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: const LoginForm(),
+                  ),
                 ],
               ),
             ),

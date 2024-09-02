@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-class LoginInput extends StatelessWidget {
-  const LoginInput({
+class TmInput extends StatelessWidget {
+  const TmInput({
     required this.label,
     required this.icon,
-    required this.controller,
+    required this.onChanged,
     this.keyboardType,
     super.key,
   });
 
   final String label;
   final Icon icon;
-  final TextEditingController controller;
+  final void Function(String) onChanged;
   final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: controller,
+      onChanged: onChanged,
       enableSuggestions: false,
       autocorrect: false,
       style: const TextStyle(fontSize: 15),

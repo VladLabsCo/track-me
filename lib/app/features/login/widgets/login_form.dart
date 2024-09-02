@@ -1,39 +1,35 @@
 import 'package:flutter/cupertino.dart';
-import 'package:track_me/app/features/login/widgets/login_button.dart';
-import 'package:track_me/app/features/login/widgets/login_input.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:track_me/app/core/core.dart';
+import 'package:track_me/app/features/login/providers/login_provider.dart';
 
-class LoginForm extends StatefulWidget {
+class LoginForm extends ConsumerWidget {
   const LoginForm({super.key});
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final loginNotifier = ref.read(loginNotifierProvider.notifier);
 
-class _LoginFormState extends State<LoginForm> {
-  final nameController = TextEditingController();
+    Future<void> handleLogin() async {
+      await loginNotifier.logIn();
+      if (context.mounted) context.replace('/');
+    }
 
-  @override
-  void dispose() {
-    nameController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.8,
-      child: Column(
-        children: [
-          LoginInput(
-            keyboardType: TextInputType.emailAddress,
-            label: 'Name',
-            controller: nameController,
-            icon: const Icon(CupertinoIcons.profile_circled),
-          ),
-          const SizedBox(height: 30),
-          LoginButton(onPressed: () {}),
-        ],
-      ),
+    return Column(
+      children: [
+        TmInput(
+          keyboardType: TextInputType.emailAddress,
+          label: 'Name',
+          icon: const Icon(CupertinoIcons.profile_circled),
+          onChanged: loginNotifier.setName,
+        ),
+        const SizedBox(height: 30),
+        TmButton(
+          label: 'START',
+          onPressed: handleLogin,
+        ),
+      ],
     );
   }
 }

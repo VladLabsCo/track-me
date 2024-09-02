@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
-class LoginButton extends StatelessWidget {
-  const LoginButton({required this.onPressed, super.key});
+class TmButton extends StatelessWidget {
+  const TmButton({
+    required this.label,
+    required this.onPressed,
+    super.key,
+  });
 
+  final String label;
   final VoidCallback onPressed;
 
   @override
@@ -19,7 +24,7 @@ class LoginButton extends StatelessWidget {
       ),
       onPressed: onPressed,
       child: Text(
-        'START',
+        label,
         style: Theme.of(context).textTheme.labelMedium,
       ),
     );
