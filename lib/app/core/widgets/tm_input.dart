@@ -20,18 +20,18 @@ class TmInput extends StatelessWidget {
       onChanged: onChanged,
       enableSuggestions: false,
       autocorrect: false,
-      style: const TextStyle(fontSize: 15),
+      style: const TextStyle(fontSize: 15, color: Colors.white),
       decoration: InputDecoration(
         hintText: label,
         hintStyle: const TextStyle(
-          color: Colors.black,
+          color: Colors.white,
           fontSize: 15,
           fontWeight: FontWeight.w400,
         ),
         prefixIcon: Container(
           width: 22,
           alignment: Alignment.center,
-          padding: const EdgeInsets.only(left: 5),
+          padding: const EdgeInsets.only(left: 3),
           child: icon,
         ),
         prefixIconConstraints: const BoxConstraints(minWidth: 50),
@@ -44,7 +44,7 @@ class TmInput extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
         ),
         filled: true,
-        fillColor: const Color(0xFFF0EFEF),
+        fillColor: const Color(0xFF202122),
       ),
     );
   }

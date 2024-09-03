@@ -13,7 +13,7 @@ class App extends StatelessWidget {
         textTheme: GoogleFonts.latoTextTheme(theme.textTheme).copyWith(
           labelMedium: const TextStyle(
             fontSize: 18,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
@@ -25,5 +25,5 @@ class App extends StatelessWidget {
 
 final theme = ThemeData(
   primaryColor: const Color(0xFFF5004F),
-  scaffoldBackgroundColor: const Color(0xFFFBFBFB),
+  scaffoldBackgroundColor: const Color(0xFF0D0E0F),
 );
