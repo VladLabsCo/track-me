@@ -11,6 +11,10 @@ class App extends StatelessWidget {
       title: 'TrackMe',
       theme: theme.copyWith(
         textTheme: GoogleFonts.latoTextTheme(theme.textTheme).copyWith(
+          titleSmall: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
           labelMedium: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -25,5 +29,6 @@ class App extends StatelessWidget {
 
 final theme = ThemeData(
   primaryColor: const Color(0xFFF5004F),
+  cardColor: const Color(0xFF202122),
   scaffoldBackgroundColor: const Color(0xFF0D0E0F),
 );

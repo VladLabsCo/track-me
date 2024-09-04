@@ -13,7 +13,14 @@ class TmScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: (fullScreen ?? false) ? child : SafeArea(child: child),
+      body: (fullScreen ?? false)
+          ? child
+          : SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: child,
+              ),
+            ),
     );
   }
 }

@@ -44,7 +44,7 @@ class TmInput extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
         ),
         filled: true,
-        fillColor: const Color(0xFF202122),
+        fillColor: Theme.of(context).cardColor,
       ),
     );
   }
