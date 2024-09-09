@@ -1,3 +1,6 @@
+// Helpers
+export 'helpers/tm_dialog_confirm.dart';
+
 // Providers
 export 'providers/disk_storage_provider.dart';
 export 'providers/user_provider.dart';

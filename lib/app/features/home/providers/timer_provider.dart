@@ -32,9 +32,16 @@ extension TimerStateMethods on TimerState {
   }
 
   TimerState pause(DateTime runDate, Duration prevDurationAtPause) {
+    final duration = DateTime.now().difference(runDate) + prevDurationAtPause;
+
     return copyWith(
       clockState: TimerClockState.paused,
-      durationAtPause: DateTime.now().difference(runDate) + prevDurationAtPause,
+      durationAtPause: Duration(
+        days: duration.inDays,
+        hours: duration.inHours % 24,
+        minutes: duration.inMinutes % 60,
+        seconds: duration.inSeconds % 60,
+      ),
       runDate: null,
     );
   }

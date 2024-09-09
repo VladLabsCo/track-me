@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:track_me/app/core/core.dart';
-import 'package:track_me/app/features/home/widgets/timer.dart';
+import 'package:track_me/app/features/home/widgets/timer/timer.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});

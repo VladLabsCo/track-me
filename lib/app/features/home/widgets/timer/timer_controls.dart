@@ -4,51 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/features/home/providers/timer_provider.dart';
 
-class Timer extends StatelessWidget {
-  const Timer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox(
-      width: double.infinity,
-      child: Column(
-        children: [
-          TimerTime(),
-          SizedBox(height: 20),
-          TimerControls(),
-        ],
-      ),
-    );
-  }
-}
-
-class TimerTime extends StatelessWidget {
-  const TimerTime({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    const clockTextStyle = TextStyle(
-      fontSize: 50,
-    );
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Text(
-          '0:00',
-          style: clockTextStyle,
-        ),
-        Text(
-          ':00',
-          style: clockTextStyle.copyWith(
-            color: const Color(0xFFB6BABE),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 class TimerControls extends ConsumerWidget {
   const TimerControls({super.key});
 
@@ -72,35 +27,25 @@ class TimerControls extends ConsumerWidget {
     }
 
     Future<void> handleStop() async {
-      final hasAgreed = await showDialog<bool>(
+      await tmDialogConfirm(
         context: context,
-        builder: (context) => AlertDialog(
-          title: const Text(
-            'End activity',
-          ),
-          content: const Text(
-            'Are you sure you are done with it?',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: const Text(
-                'Nevermind...',
-                style: TextStyle(color: Colors.grey),
-              ),
-            ),
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: const Text(
-                'Yes!',
-                style: TextStyle(color: Colors.blue),
-              ),
-            ),
-          ],
-        ),
+        title: 'End activity',
+        subtitle: 'Are you sure you are done with it?',
+        deny: 'Nevermind...',
+        accept: 'Yes!',
+        onAccepted: ref.read(timerNotifierProvider.notifier).stop,
       );
+    }
 
-      if (hasAgreed ?? false) ref.read(timerNotifierProvider.notifier).stop();
+    Future<void> handleCancel() async {
+      await tmDialogConfirm(
+        context: context,
+        title: 'Cancel activity',
+        subtitle: 'Are you sure you want to discard your progress?',
+        deny: 'Oops, go back',
+        accept: 'Yes, cancel it!',
+        onAccepted: ref.read(timerNotifierProvider.notifier).stop,
+      );
     }
 
     return Row(
@@ -110,7 +55,7 @@ class TimerControls extends ConsumerWidget {
           TmIconButton(
             padding: 15,
             backgroundColor: Theme.of(context).cardColor,
-            onPressed: handleStop,
+            onPressed: handleCancel,
             child: const Icon(
               CupertinoIcons.arrow_counterclockwise,
               size: 20,
