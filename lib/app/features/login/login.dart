@@ -46,20 +46,18 @@ class Login extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
                         ),
                       ),
                     ],
                   ),
+                  const SizedBox(height: 20),
                   const Text(
                     'Insert your name to start',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 22,
-                      color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 30),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: const LoginForm(),

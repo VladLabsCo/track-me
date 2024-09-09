@@ -10,16 +10,20 @@ class App extends StatelessWidget {
     return MaterialApp.router(
       title: 'TrackMe',
       theme: theme.copyWith(
-        textTheme: GoogleFonts.latoTextTheme(theme.textTheme).copyWith(
-          titleSmall: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-          labelMedium: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        textTheme: GoogleFonts.latoTextTheme(theme.textTheme)
+            .copyWith(
+              titleSmall: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+              labelMedium: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+            .apply(
+              bodyColor: Colors.white,
+            ),
       ),
       routerConfig: router,
       debugShowCheckedModeBanner: false,
@@ -31,4 +35,5 @@ final theme = ThemeData(
   primaryColor: const Color(0xFFF5004F),
   cardColor: const Color(0xFF202122),
   scaffoldBackgroundColor: const Color(0xFF0D0E0F),
+  dialogBackgroundColor: const Color(0xFF202122),
 );

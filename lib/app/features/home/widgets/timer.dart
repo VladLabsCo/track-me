@@ -29,7 +29,6 @@ class TimerTime extends StatelessWidget {
   Widget build(BuildContext context) {
     const clockTextStyle = TextStyle(
       fontSize: 50,
-      color: Colors.white,
     );
 
     return Row(
@@ -76,7 +75,9 @@ class TimerControls extends ConsumerWidget {
       final hasAgreed = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('Confirm'),
+          title: const Text(
+            'End activity',
+          ),
           content: const Text(
             'Are you sure you are done with it?',
           ),
@@ -85,13 +86,13 @@ class TimerControls extends ConsumerWidget {
               onPressed: () => Navigator.of(context).pop(false),
               child: const Text(
                 'Nevermind...',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.grey),
               ),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
               child: const Text(
-                'Yes',
+                'Yes!',
                 style: TextStyle(color: Colors.blue),
               ),
             ),
