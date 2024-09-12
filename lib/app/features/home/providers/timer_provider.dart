@@ -58,7 +58,7 @@ extension TimerStateMethods on TimerState {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class TimerNotifier extends _$TimerNotifier {
   @override
   TimerState build() => TimerState.initial();

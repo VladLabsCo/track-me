@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:track_me/app/core/core.dart';
+import 'package:track_me/app/features/home/widgets/activity_picker.dart';
 import 'package:track_me/app/features/home/widgets/timer/timer.dart';
 
 class Home extends StatelessWidget {
@@ -14,6 +15,8 @@ class Home extends StatelessWidget {
           children: [
             TmLogo(),
             SizedBox(height: 30),
+            ActivityPicker(),
+            SizedBox(height: 20),
             Timer(),
           ],
         ),

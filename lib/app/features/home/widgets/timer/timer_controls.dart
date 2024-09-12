@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:track_me/app/core/core.dart';
+import 'package:track_me/app/features/home/providers/activity_provider.dart';
 import 'package:track_me/app/features/home/providers/timer_provider.dart';
 
 class TimerControls extends ConsumerWidget {
@@ -48,22 +49,26 @@ class TimerControls extends ConsumerWidget {
       );
     }
 
+    final isClockRunning = clockState != TimerClockState.initial;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (clockState != TimerClockState.initial)
-          TmIconButton(
-            padding: 15,
-            backgroundColor: Theme.of(context).cardColor,
-            onPressed: handleCancel,
-            child: const Icon(
-              CupertinoIcons.arrow_counterclockwise,
-              size: 20,
-              color: Color(0xFFF3F3F3),
-            ),
+        TmIconButton(
+          disabled: !isClockRunning,
+          disabledOpacity: 0,
+          padding: 15,
+          backgroundColor: Theme.of(context).cardColor,
+          onPressed: handleCancel,
+          child: const Icon(
+            CupertinoIcons.arrow_counterclockwise,
+            size: 20,
+            color: Color(0xFFF3F3F3),
           ),
+        ),
         const SizedBox(width: 25),
         TmIconButton(
+          disabled: ref.watch(activityNotifierProvider).activeIndex == null,
           shadowColor: Theme.of(context).primaryColor,
           onPressed: handlePlayPauseClick,
           child: Transform.translate(
@@ -78,17 +83,18 @@ class TimerControls extends ConsumerWidget {
           ),
         ),
         const SizedBox(width: 25),
-        if (clockState != TimerClockState.initial)
-          TmIconButton(
-            padding: 15,
-            backgroundColor: Theme.of(context).cardColor,
-            onPressed: handleStop,
-            child: const Icon(
-              CupertinoIcons.stop_fill,
-              size: 20,
-              color: Color(0xFFF3F3F3),
-            ),
+        TmIconButton(
+          disabled: !isClockRunning,
+          disabledOpacity: 0,
+          padding: 15,
+          backgroundColor: Theme.of(context).cardColor,
+          onPressed: handleStop,
+          child: const Icon(
+            CupertinoIcons.stop_fill,
+            size: 20,
+            color: Color(0xFFF3F3F3),
           ),
+        ),
       ],
     );
   }
