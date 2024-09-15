@@ -34,7 +34,10 @@ class TimerControls extends ConsumerWidget {
         subtitle: 'Are you sure you are done with it?',
         deny: 'Nevermind...',
         accept: 'Yes!',
-        onAccepted: ref.read(timerNotifierProvider.notifier).stop,
+        onAccepted: () {
+          ref.read(timerNotifierProvider.notifier).stop();
+          ref.read(activityNotifierProvider.notifier).setActive(null);
+        },
       );
     }
 
@@ -68,7 +71,7 @@ class TimerControls extends ConsumerWidget {
         ),
         const SizedBox(width: 25),
         TmIconButton(
-          disabled: ref.watch(activityNotifierProvider).activeIndex == null,
+          disabled: ref.watch(activityNotifierProvider).activeId == null,
           shadowColor: Theme.of(context).primaryColor,
           onPressed: handlePlayPauseClick,
           child: Transform.translate(

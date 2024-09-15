@@ -15,6 +15,12 @@ final router = GoRouter(
         GoRoute(
           path: '/',
           builder: (context, state) => const Home(),
+          routes: [
+            GoRoute(
+              path: 'activity-form',
+              builder: (context, state) => const ActivityForm(),
+            ),
+          ],
         ),
       ],
     ),

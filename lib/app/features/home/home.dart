@@ -9,17 +9,13 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const TmScaffold(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TmLogo(),
-            SizedBox(height: 30),
-            ActivityPicker(),
-            SizedBox(height: 20),
-            Timer(),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ActivityPicker(),
+          SizedBox(height: 20),
+          Timer(),
+        ],
       ),
     );
   }

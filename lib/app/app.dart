@@ -20,6 +20,10 @@ class App extends StatelessWidget {
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
+              bodySmall: TextStyle(
+                fontSize: 15,
+                color: Colors.white.withAlpha(180),
+              ),
             )
             .apply(
               bodyColor: Colors.white,
