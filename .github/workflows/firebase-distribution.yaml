@@ -18,7 +18,7 @@ env:
 jobs:
   android:
     name: Build & Push Android
-    runs-on: [self-hosted, macOS]
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
