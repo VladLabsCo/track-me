@@ -18,7 +18,7 @@ env:
 jobs:
   android:
     name: Build & Push Android
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
@@ -55,7 +55,7 @@ jobs:
           echo "${{ secrets.JKS_BASE64 }}" | base64 --decode > ./prod.jks
 
       - name: Build Android APK
-        run: flutter build apk -t lib/main_production.dart --flavor production --release --dart-define=RELEASE_MODE=canary
+        run: flutter build apk -t lib/main_production.dart --flavor production --release
 
       - name: "Setup Node"
         uses: actions/setup-node@v4
