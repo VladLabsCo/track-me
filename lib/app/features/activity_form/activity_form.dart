@@ -11,8 +11,8 @@ class ActivityForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Future<void> handleSubmit() async {
-      await ref.read(activityFormProvider.notifier).submit();
-      if (context.mounted) context.pop();
+      final hasSaved = await ref.read(activityFormProvider.notifier).submit();
+      if (hasSaved && context.mounted) context.pop();
     }
 
     return TmScaffold.nested(
