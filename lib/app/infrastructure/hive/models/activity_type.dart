@@ -1,11 +1,11 @@
 import 'package:hive/hive.dart';
 import 'package:track_me/app/infrastructure/hive/hive.dart';
 
-part 'activity.g.dart';
+part 'activity_type.g.dart';
 
 @HiveType(typeId: 1)
-class Activity extends HiveObject implements HiveBoxDocument {
-  Activity({
+class ActivityType extends HiveObject implements HiveBoxDocument {
+  ActivityType({
     required this.id,
     required this.name,
     this.icon,
@@ -26,8 +26,8 @@ class Activity extends HiveObject implements HiveBoxDocument {
   final String? category;
 }
 
-class ActivityCreateDto {
-  const ActivityCreateDto({
+class ActivityTypeCreateDto {
+  const ActivityTypeCreateDto({
     required this.name,
     this.icon,
     this.category,

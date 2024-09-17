@@ -10,19 +10,20 @@ class ActivityPicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final activityState = ref.watch(activityNotifierProvider);
-    final activities = activityState.activities;
+    final activityState = ref.watch(activityTypeNotifierProvider);
+    final activityTypes = activityState.activityTypes;
     final activeId = activityState.activeId;
 
     final activeIndex = activeId != null
-        ? activities.indexWhere((activity) => activity.id == activeId)
+        ? activityTypes
+            .indexWhere((activityType) => activityType.id == activeId)
         : null;
 
     Future<void> showDialog() async {
       final selectedActivityId = await showCupertinoModalPopup<String>(
         context: context,
         builder: (BuildContext context) => _ActivityPickerPopup(
-          activities: activities,
+          activityTypes: activityTypes,
           initialIndex: activeIndex,
         ),
       );
@@ -32,7 +33,7 @@ class ActivityPicker extends ConsumerWidget {
           if (context.mounted) context.go('/activity-form');
         } else {
           ref
-              .read(activityNotifierProvider.notifier)
+              .read(activityTypeNotifierProvider.notifier)
               .setActive(selectedActivityId);
         }
       }
@@ -53,7 +54,7 @@ class ActivityPicker extends ConsumerWidget {
         onPressed: showDialog,
         child: Text(
           activeIndex != null
-              ? activities[activeIndex].name
+              ? activityTypes[activeIndex].name
               : 'Select activity',
           style: Theme.of(context).textTheme.labelMedium,
         ),
@@ -63,9 +64,9 @@ class ActivityPicker extends ConsumerWidget {
 }
 
 class _ActivityPickerPopup extends StatefulWidget {
-  const _ActivityPickerPopup({required this.activities, this.initialIndex});
+  const _ActivityPickerPopup({required this.activityTypes, this.initialIndex});
 
-  final List<Activity> activities;
+  final List<ActivityType> activityTypes;
   final int? initialIndex;
 
   @override
@@ -81,13 +82,13 @@ class _ActivityPickerPopupState extends State<_ActivityPickerPopup> {
 
   @override
   Widget build(BuildContext context) {
-    final activitiesLength = widget.activities.length;
+    final activitiesLength = widget.activityTypes.length;
 
     void handleDone() {
       if (_selectedItemIndex + 1 > activitiesLength) {
         Navigator.of(context).pop('0');
       } else {
-        Navigator.of(context).pop(widget.activities[_selectedItemIndex].id);
+        Navigator.of(context).pop(widget.activityTypes[_selectedItemIndex].id);
       }
     }
 
@@ -117,7 +118,7 @@ class _ActivityPickerPopupState extends State<_ActivityPickerPopup> {
                   (int index) {
                     final text = (index + 1) > activitiesLength
                         ? 'New...'
-                        : widget.activities[index].name;
+                        : widget.activityTypes[index].name;
 
                     return Center(
                       child: Text(

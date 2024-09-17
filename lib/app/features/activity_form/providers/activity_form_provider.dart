@@ -34,14 +34,14 @@ class ActivityForm extends _$ActivityForm {
     if (state.name.isEmpty) return false;
 
     final activityId = await ref
-        .read(activityHiveProvider.notifier)
-        .create(ActivityCreateDto(name: state.name));
+        .read(activityTypeHiveProvider.notifier)
+        .create(ActivityTypeCreateDto(name: state.name));
 
     await ref
         .read(activityStatsHiveProvider.notifier)
         .create(ActivityStatsCreateDto(activityId: activityId));
 
-    ref.read(activityNotifierProvider.notifier)
+    ref.read(activityTypeNotifierProvider.notifier)
       ..getAll()
       ..setActive(activityId);
 

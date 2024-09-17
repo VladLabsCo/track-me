@@ -3,21 +3,22 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/infrastructure/hive/hive.dart';
 
-part 'activity_hive_provider.g.dart';
+part 'activity_type_hive_provider.g.dart';
 
 @riverpod
-class ActivityHive extends _$ActivityHive
-    with HiveProviderMixin<Activity>
-    implements HiveProviderBase<Activity, ActivityCreateDto, Activity> {
+class ActivityTypeHive extends _$ActivityTypeHive
+    with HiveProviderMixin<ActivityType>
+    implements
+        HiveProviderBase<ActivityType, ActivityTypeCreateDto, ActivityType> {
   @override
   void build() {}
 
   @override
-  Box<Activity> getBox() => Hive.box<Activity>(activityBox);
+  Box<ActivityType> getBox() => Hive.box<ActivityType>(activityTypeBox);
 
   @override
-  Future<String> create(ActivityCreateDto activityCreateDto) async {
-    final activity = Activity(
+  Future<String> create(ActivityTypeCreateDto activityCreateDto) async {
+    final activity = ActivityType(
       id: tmUuid(),
       name: activityCreateDto.name,
       icon: activityCreateDto.icon,
@@ -30,7 +31,7 @@ class ActivityHive extends _$ActivityHive
   }
 
   @override
-  Future<String> update(String id, Activity activity) async {
+  Future<String> update(String id, ActivityType activity) async {
     await getBox().putAt(getIndexFromId(id), activity);
     return id;
   }

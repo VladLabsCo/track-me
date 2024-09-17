@@ -36,7 +36,7 @@ class TimerControls extends ConsumerWidget {
         accept: 'Yes!',
         onAccepted: () {
           ref.read(timerNotifierProvider.notifier).stop();
-          ref.read(activityNotifierProvider.notifier).setActive(null);
+          ref.read(activityTypeNotifierProvider.notifier).setActive(null);
         },
       );
     }
@@ -71,7 +71,7 @@ class TimerControls extends ConsumerWidget {
         ),
         const SizedBox(width: 25),
         TmIconButton(
-          disabled: ref.watch(activityNotifierProvider).activeId == null,
+          disabled: ref.watch(activityTypeNotifierProvider).activeId == null,
           shadowColor: Theme.of(context).primaryColor,
           onPressed: handlePlayPauseClick,
           child: Transform.translate(

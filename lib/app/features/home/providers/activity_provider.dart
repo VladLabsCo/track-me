@@ -6,39 +6,39 @@ part 'activity_provider.freezed.dart';
 part 'activity_provider.g.dart';
 
 @freezed
-class ActivityState with _$ActivityState {
-  const factory ActivityState({
-    required List<Activity> activities,
+class ActivityTypeState with _$ActivityTypeState {
+  const factory ActivityTypeState({
+    required List<ActivityType> activityTypes,
     String? activeId,
-  }) = _ActivityState;
+  }) = _ActivityTypeState;
 
-  factory ActivityState.inital(List<Activity> activities) {
-    return ActivityState(activities: activities);
+  factory ActivityTypeState.inital(List<ActivityType> activities) {
+    return ActivityTypeState(activityTypes: activities);
   }
 }
 
-extension ActivityStateMethods on ActivityState {
-  ActivityState setActivities(List<Activity> activities) {
-    return copyWith(activities: activities);
+extension ActivityStateMethods on ActivityTypeState {
+  ActivityTypeState setActivities(List<ActivityType> activities) {
+    return copyWith(activityTypes: activities);
   }
 
-  ActivityState setActive(String? id) {
+  ActivityTypeState setActive(String? id) {
     return copyWith(activeId: id);
   }
 }
 
 @Riverpod(keepAlive: true)
-class ActivityNotifier extends _$ActivityNotifier {
+class ActivityTypeNotifier extends _$ActivityTypeNotifier {
   @override
-  ActivityState build() {
-    return ActivityState.inital(
-      ref.read(activityHiveProvider.notifier).getAll(),
+  ActivityTypeState build() {
+    return ActivityTypeState.inital(
+      ref.read(activityTypeHiveProvider.notifier).getAll(),
     );
   }
 
   void getAll() {
     state = state.setActivities(
-      ref.read(activityHiveProvider.notifier).getAll(),
+      ref.read(activityTypeHiveProvider.notifier).getAll(),
     );
   }
 

@@ -1,19 +1,19 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:track_me/app/infrastructure/hive/adapters/duration_adapter.dart';
-import 'package:track_me/app/infrastructure/hive/models/activity.dart';
 import 'package:track_me/app/infrastructure/hive/models/activity_stats.dart';
+import 'package:track_me/app/infrastructure/hive/models/activity_type.dart';
 
 // Models
-export 'models/activity.dart';
+export 'models/activity_type.dart';
 
 // Providers
-export 'providers/activity_hive_provider.dart';
+export 'providers/activity_type_hive_provider.dart';
 
 // Widgets
 export 'widgets/hive_wrapper.dart';
 
-const activityBox = 'activityBox';
+const activityTypeBox = 'activityTypeBox';
 const activityStatsBox = 'activityStatsBox';
 
 Future<void> initHive() async {
@@ -21,10 +21,10 @@ Future<void> initHive() async {
 
   Hive
     ..registerAdapter(DurationAdapter())
-    ..registerAdapter(ActivityAdapter())
+    ..registerAdapter(ActivityTypeAdapter())
     ..registerAdapter(ActivityStatsAdapter());
 
-  await Hive.openBox<Activity>(activityBox);
+  await Hive.openBox<ActivityType>(activityTypeBox);
   await Hive.openBox<ActivityStats>(activityStatsBox);
 }
 
