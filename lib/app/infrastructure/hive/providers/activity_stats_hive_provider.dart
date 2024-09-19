@@ -18,10 +18,10 @@ class ActivityStatsHive extends _$ActivityStatsHive
   Box<ActivityStats> getBox() => Hive.box<ActivityStats>(activityStatsBox);
 
   @override
-  Future<String> create(ActivityStatsCreateDto activityCreateDto) async {
+  Future<String> create(ActivityStatsCreateDto activityStatsCreateDto) async {
     final newActivityStats = ActivityStats(
       id: tmUuid(),
-      activityId: activityCreateDto.activityId,
+      activityTypeId: activityStatsCreateDto.activityTypeId,
       totalDuration: Duration.zero,
     );
 

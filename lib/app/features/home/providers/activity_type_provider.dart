@@ -2,8 +2,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:track_me/app/infrastructure/infrastucture.dart';
 
-part 'activity_provider.freezed.dart';
-part 'activity_provider.g.dart';
+part 'activity_type_provider.freezed.dart';
+part 'activity_type_provider.g.dart';
 
 @freezed
 class ActivityTypeState with _$ActivityTypeState {
@@ -12,13 +12,13 @@ class ActivityTypeState with _$ActivityTypeState {
     String? activeId,
   }) = _ActivityTypeState;
 
-  factory ActivityTypeState.inital(List<ActivityType> activities) {
-    return ActivityTypeState(activityTypes: activities);
+  factory ActivityTypeState.inital(List<ActivityType> activityTypes) {
+    return ActivityTypeState(activityTypes: activityTypes);
   }
 }
 
 extension ActivityStateMethods on ActivityTypeState {
-  ActivityTypeState setActivities(List<ActivityType> activities) {
+  ActivityTypeState setActivityTypes(List<ActivityType> activities) {
     return copyWith(activityTypes: activities);
   }
 
@@ -37,7 +37,7 @@ class ActivityTypeNotifier extends _$ActivityTypeNotifier {
   }
 
   void getAll() {
-    state = state.setActivities(
+    state = state.setActivityTypes(
       ref.read(activityTypeHiveProvider.notifier).getAll(),
     );
   }

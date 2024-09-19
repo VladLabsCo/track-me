@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:track_me/app/features/home/providers/activity_provider.dart';
+import 'package:track_me/app/features/home/providers/activity_type_provider.dart';
 import 'package:track_me/app/infrastructure/hive/models/activity_stats.dart';
 import 'package:track_me/app/infrastructure/hive/providers/activity_stats_hive_provider.dart';
 import 'package:track_me/app/infrastructure/infrastucture.dart';
@@ -33,17 +33,17 @@ class ActivityForm extends _$ActivityForm {
   Future<bool> submit() async {
     if (state.name.isEmpty) return false;
 
-    final activityId = await ref
+    final activityTypeId = await ref
         .read(activityTypeHiveProvider.notifier)
         .create(ActivityTypeCreateDto(name: state.name));
 
     await ref
         .read(activityStatsHiveProvider.notifier)
-        .create(ActivityStatsCreateDto(activityId: activityId));
+        .create(ActivityStatsCreateDto(activityTypeId: activityTypeId));
 
     ref.read(activityTypeNotifierProvider.notifier)
       ..getAll()
-      ..setActive(activityId);
+      ..setActive(activityTypeId);
 
     return true;
   }

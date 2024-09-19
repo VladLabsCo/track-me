@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:track_me/app/features/home/providers/activity_provider.dart';
+import 'package:track_me/app/features/home/providers/activity_type_provider.dart';
 import 'package:track_me/app/infrastructure/infrastucture.dart';
 
 class ActivityPicker extends ConsumerWidget {
@@ -10,9 +10,9 @@ class ActivityPicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final activityState = ref.watch(activityTypeNotifierProvider);
-    final activityTypes = activityState.activityTypes;
-    final activeId = activityState.activeId;
+    final activityTypeState = ref.watch(activityTypeNotifierProvider);
+    final activityTypes = activityTypeState.activityTypes;
+    final activeId = activityTypeState.activeId;
 
     final activeIndex = activeId != null
         ? activityTypes
@@ -20,7 +20,7 @@ class ActivityPicker extends ConsumerWidget {
         : null;
 
     Future<void> showDialog() async {
-      final selectedActivityId = await showCupertinoModalPopup<String>(
+      final selectedActivityTypeId = await showCupertinoModalPopup<String>(
         context: context,
         builder: (BuildContext context) => _ActivityPickerPopup(
           activityTypes: activityTypes,
@@ -28,13 +28,13 @@ class ActivityPicker extends ConsumerWidget {
         ),
       );
 
-      if (selectedActivityId != null) {
-        if (selectedActivityId == '0') {
+      if (selectedActivityTypeId != null) {
+        if (selectedActivityTypeId == '0') {
           if (context.mounted) context.go('/activity-form');
         } else {
           ref
               .read(activityTypeNotifierProvider.notifier)
-              .setActive(selectedActivityId);
+              .setActive(selectedActivityTypeId);
         }
       }
     }

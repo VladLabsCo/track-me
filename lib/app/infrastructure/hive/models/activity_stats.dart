@@ -7,7 +7,7 @@ part 'activity_stats.g.dart';
 class ActivityStats extends HiveObject implements HiveBoxDocument {
   ActivityStats({
     required this.id,
-    required this.activityId,
+    required this.activityTypeId,
     required this.totalDuration,
   });
 
@@ -16,7 +16,7 @@ class ActivityStats extends HiveObject implements HiveBoxDocument {
   final String id;
 
   @HiveField(1)
-  final String activityId;
+  final String activityTypeId;
 
   @HiveField(2)
   final Duration totalDuration;
@@ -24,8 +24,8 @@ class ActivityStats extends HiveObject implements HiveBoxDocument {
 
 class ActivityStatsCreateDto {
   const ActivityStatsCreateDto({
-    required this.activityId,
+    required this.activityTypeId,
   });
 
-  final String activityId;
+  final String activityTypeId;
 }

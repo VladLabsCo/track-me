@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:track_me/app/core/core.dart';
-import 'package:track_me/app/features/home/providers/activity_provider.dart';
+import 'package:track_me/app/features/home/providers/activity_type_provider.dart';
 import 'package:track_me/app/features/home/providers/timer_provider.dart';
 
 class TimerControls extends ConsumerWidget {
