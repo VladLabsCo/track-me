@@ -2,7 +2,6 @@ import 'package:hive/hive.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/infrastructure/hive/hive.dart';
-import 'package:track_me/app/infrastructure/hive/models/activity_stats.dart';
 
 part 'activity_stats_hive_provider.g.dart';
 
@@ -34,5 +33,12 @@ class ActivityStatsHive extends _$ActivityStatsHive
   Future<String> update(String id, ActivityStats activityStats) async {
     await getBox().putAt(getIndexFromId(id), activityStats);
     return id;
+  }
+
+  ActivityStats findByActivityTypeId(String activityTypeId) {
+    final activityStat = getAll().firstWhere(
+      (activityStat) => activityStat.activityTypeId == activityTypeId,
+    );
+    return getBox().getAt(getIndexFromId(activityStat.id))!;
   }
 }

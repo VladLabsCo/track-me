@@ -3,7 +3,7 @@ import 'package:track_me/app/infrastructure/hive/hive.dart';
 
 part 'activity_type.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 3)
 class ActivityType extends HiveObject implements HiveBoxDocument {
   ActivityType({
     required this.id,

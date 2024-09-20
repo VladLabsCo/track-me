@@ -1,5 +1,6 @@
 // Helpers
 export 'helpers/tm_dialog_confirm.dart';
+export 'helpers/tm_time_format.dart';
 export 'helpers/tm_uuid.dart';
 
 // Providers

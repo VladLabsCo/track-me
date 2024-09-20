@@ -2,8 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:track_me/app/core/core.dart';
+import 'package:track_me/app/core/providers/activity_stats_provider.dart';
+import 'package:track_me/app/features/home/providers/activity_provider.dart';
 import 'package:track_me/app/features/home/providers/activity_type_provider.dart';
 import 'package:track_me/app/features/home/providers/timer_provider.dart';
+import 'package:track_me/app/infrastructure/infrastucture.dart';
 
 class TimerControls extends ConsumerWidget {
   const TimerControls({super.key});
@@ -34,9 +37,41 @@ class TimerControls extends ConsumerWidget {
         subtitle: 'Are you sure you are done with it?',
         deny: 'Nevermind...',
         accept: 'Yes!',
-        onAccepted: () {
+        onAccepted: () async {
+          final timerState = ref.read(timerNotifierProvider);
+          final activeTypeId = ref.read(activityTypeNotifierProvider).activeId;
+
           ref.read(timerNotifierProvider.notifier).stop();
           ref.read(activityTypeNotifierProvider.notifier).setActive(null);
+
+          late Duration totalDuration;
+
+          if (timerState.clockState == TimerClockState.running) {
+            final totalDurationFull =
+                DateTime.now().difference(timerState.runDate!) +
+                    timerState.durationAtPause;
+            totalDuration = Duration(
+              days: totalDurationFull.inDays,
+              hours: totalDurationFull.inHours % 24,
+              minutes: totalDurationFull.inMinutes % 60,
+              seconds: totalDurationFull.inSeconds % 60,
+            );
+          } else {
+            totalDuration = timerState.durationAtPause;
+          }
+
+          await ref.read(activityHiveProvider.notifier).create(
+                ActivityCreateDto(
+                  activityTypeId: activeTypeId!,
+                  duration: totalDuration,
+                ),
+              );
+
+          await ref
+              .read(activityStatsNotifierProvider.notifier)
+              .registerTimer(activeTypeId, totalDuration);
+
+          ref.invalidate(activityNotifierProvider);
         },
       );
     }

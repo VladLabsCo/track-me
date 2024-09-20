@@ -3,13 +3,21 @@ import 'package:track_me/app/infrastructure/hive/hive.dart';
 
 part 'activity_stats.g.dart';
 
-@HiveType(typeId: 2)
+@HiveType(typeId: 4)
 class ActivityStats extends HiveObject implements HiveBoxDocument {
   ActivityStats({
     required this.id,
     required this.activityTypeId,
     required this.totalDuration,
   });
+
+  ActivityStats copyWithDuration(Duration duration) {
+    return ActivityStats(
+      id: id,
+      activityTypeId: activityTypeId,
+      totalDuration: totalDuration + duration,
+    );
+  }
 
   @override
   @HiveField(0)
@@ -21,6 +29,8 @@ class ActivityStats extends HiveObject implements HiveBoxDocument {
   @HiveField(2)
   final Duration totalDuration;
 }
+
+extension ActivityStatsMethods on ActivityStats {}
 
 class ActivityStatsCreateDto {
   const ActivityStatsCreateDto({

@@ -23,7 +23,10 @@ class ActivityForm extends ConsumerWidget {
         children: [
           Text(
             'Enter activity data to save',
-            style: Theme.of(context).textTheme.bodySmall,
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.white.withAlpha(180),
+            ),
           ),
           const SizedBox(height: 30),
           Expanded(
