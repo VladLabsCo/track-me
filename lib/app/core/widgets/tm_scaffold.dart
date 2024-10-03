@@ -51,7 +51,7 @@ class TmScaffold extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (!nested) ...[
-            const SizedBox(height: 7),
+            const SizedBox(height: 12),
             const TmLogo(),
             const SizedBox(height: 7),
           ],
@@ -66,6 +66,7 @@ class TmScaffold extends StatelessWidget {
         child: nested
             ? Column(
                 children: [
+                  const SizedBox(height: 4),
                   NestedHeader(title: title),
                   Expanded(child: content),
                 ],

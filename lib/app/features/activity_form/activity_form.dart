@@ -22,7 +22,7 @@ class ActivityForm extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Enter activity data to save',
+            'This is were you can create new activities.',
             style: TextStyle(
               fontSize: 15,
               color: Colors.white.withAlpha(180),
