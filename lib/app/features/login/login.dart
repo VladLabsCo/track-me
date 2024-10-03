@@ -7,13 +7,16 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHight = MediaQuery.of(context).size.height;
+    final formHeigh = (screenHight / 2) > 320 ? screenHight / 2 : 320.0;
+
     return TmScaffold.fullScreen(
       child: SingleChildScrollView(
         child: Column(
           children: [
             Container(
               width: double.infinity,
-              height: MediaQuery.of(context).size.height / 2,
+              height: screenHight - formHeigh,
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/login-background.jpg'),
@@ -22,7 +25,7 @@ class Login extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 2,
+              height: formHeigh,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
