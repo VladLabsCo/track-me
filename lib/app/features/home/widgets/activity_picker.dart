@@ -103,6 +103,14 @@ class _ActivityPickerPopupState extends State<_ActivityPickerPopup> {
         top: false,
         child: Column(
           children: [
+            if (activitiesLength == 0) ...[
+              const SizedBox(height: 12),
+              Text(
+                'No activity yet. Press on "Done" to create one.',
+                style: Theme.of(context).textTheme.bodySmall,
+                textAlign: TextAlign.center,
+              ),
+            ],
             Expanded(
               child: CupertinoPicker(
                 magnification: 1.22,
@@ -137,6 +145,28 @@ class _ActivityPickerPopupState extends State<_ActivityPickerPopup> {
                 style: TextStyle(color: Colors.blue),
               ),
             ),
+            // Row(
+            //   children: [
+            //     Expanded(
+            //       child: CupertinoButton(
+            //         onPressed: handleDone,
+            //         child: const Text(
+            //           'New...',
+            //           style: TextStyle(color: Colors.blue),
+            //         ),
+            //       ),
+            //     ),
+            //     Expanded(
+            //       child: CupertinoButton(
+            //         onPressed: handleDone,
+            //         child: const Text(
+            //           'Done',
+            //           style: TextStyle(color: Colors.blue),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
