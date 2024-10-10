@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:track_me/app/features/home/providers/activity_type_provider.dart';
+import 'package:track_me/app/core/providers/activity_type_provider.dart';
 import 'package:track_me/app/infrastructure/infrastucture.dart';
 
 class ActivityPicker extends ConsumerWidget {
@@ -145,28 +145,6 @@ class _ActivityPickerPopupState extends State<_ActivityPickerPopup> {
                 style: TextStyle(color: Colors.blue),
               ),
             ),
-            // Row(
-            //   children: [
-            //     Expanded(
-            //       child: CupertinoButton(
-            //         onPressed: handleDone,
-            //         child: const Text(
-            //           'New...',
-            //           style: TextStyle(color: Colors.blue),
-            //         ),
-            //       ),
-            //     ),
-            //     Expanded(
-            //       child: CupertinoButton(
-            //         onPressed: handleDone,
-            //         child: const Text(
-            //           'Done',
-            //           style: TextStyle(color: Colors.blue),
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
           ],
         ),
       ),

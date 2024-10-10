@@ -11,7 +11,7 @@ class Login extends StatelessWidget {
     final formHeigh = (screenHight / 2) > 320 ? screenHight / 2 : 320.0;
 
     return TmScaffold.fullScreen(
-      child: SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Container(

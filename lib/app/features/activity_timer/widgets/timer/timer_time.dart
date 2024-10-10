@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:track_me/app/features/home/providers/timer_provider.dart';
+import 'package:track_me/app/features/activity_timer/providers/timer_provider.dart';
 
 class TimerTime extends ConsumerWidget {
   const TimerTime({super.key});
@@ -29,6 +29,26 @@ class _TimerTimeConsumerState extends State<_TimerTimeConsumer> {
   Timer? _timer;
 
   @override
+  void initState() {
+    // Resume normal behaviour when navigating back to screen
+    if (widget.timerState.clockState != TimerClockState.initial) {
+      _getSetTime(
+        widget.timerState.runDate,
+        widget.timerState.durationAtPause,
+      );
+
+      if (widget.timerState.clockState == TimerClockState.running) {
+        _startTimer(
+          widget.timerState.runDate!,
+          widget.timerState.durationAtPause,
+        );
+      }
+    }
+
+    super.initState();
+  }
+
+  @override
   void didUpdateWidget(covariant _TimerTimeConsumer oldWidget) {
     switch (widget.timerState.clockState) {
       case TimerClockState.initial:
@@ -47,47 +67,64 @@ class _TimerTimeConsumerState extends State<_TimerTimeConsumer> {
     super.didUpdateWidget(oldWidget);
   }
 
+  @override
+  void dispose() {
+    if (_timer != null) _timer!.cancel();
+    super.dispose();
+  }
+
   void _resetTimer(bool wasRunning) {
     if (wasRunning) _timer!.cancel();
 
-    setState(() {
-      _timeHM = '0:00';
-      _timeS = '00';
-      if (wasRunning) _timer = null;
-    });
+    if (mounted) {
+      setState(() {
+        _timeHM = '0:00';
+        _timeS = '00';
+        if (wasRunning) _timer = null;
+      });
+    }
   }
 
   void _startTimer(DateTime runDate, Duration durationAtPause) {
-    setState(() {
-      _timer ??= Timer.periodic(
-        const Duration(seconds: 1),
-        (_) => _getSetTime(runDate, durationAtPause),
-      );
-    });
+    if (mounted) {
+      setState(() {
+        _timer ??= Timer.periodic(
+          const Duration(seconds: 1),
+          (_) => _getSetTime(runDate, durationAtPause),
+        );
+      });
+    }
   }
 
   void _stopTimer() {
     if (_timer != null) {
       _timer!.cancel();
 
-      setState(() {
-        _timer = null;
-      });
+      if (mounted) {
+        setState(() {
+          _timer = null;
+        });
+      }
     }
   }
 
-  void _getSetTime(DateTime runDate, Duration durationAtPause) {
+  void _getSetTime(DateTime? runDate, Duration durationAtPause) {
     final now = DateTime.now();
-    final difference = now.difference(runDate) + durationAtPause;
 
-    final hours = difference.inHours.toString();
-    final minutes = (difference.inMinutes % 60).toString().padLeft(2, '0');
-    final seconds = (difference.inSeconds % 60).toString().padLeft(2, '0');
+    final totalDuration = runDate != null
+        ? now.difference(runDate) + durationAtPause
+        : durationAtPause;
 
-    setState(() {
-      _timeHM = '$hours:$minutes';
-      _timeS = seconds;
-    });
+    final hours = totalDuration.inHours.toString();
+    final minutes = (totalDuration.inMinutes % 60).toString().padLeft(2, '0');
+    final seconds = (totalDuration.inSeconds % 60).toString().padLeft(2, '0');
+
+    if (mounted) {
+      setState(() {
+        _timeHM = '$hours:$minutes';
+        _timeS = seconds;
+      });
+    }
   }
 
   final clockTextStyle = const TextStyle(

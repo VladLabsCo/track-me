@@ -18,7 +18,7 @@ class ActivityForm extends ConsumerWidget {
     return TmScaffold.nested(
       removePaddingTop: true,
       title: 'New Activity',
-      child: Column(
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(

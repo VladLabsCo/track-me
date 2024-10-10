@@ -4,41 +4,43 @@ import 'package:track_me/app/core/core.dart';
 
 class TmScaffold extends StatelessWidget {
   const TmScaffold({
-    required this.child,
+    required this.body,
     this.fullScreen = false,
     this.nested = false,
     this.removePaddingTop = false,
     this.title = '',
+    this.bottomNavigationBar,
     super.key,
   });
 
-  factory TmScaffold.fullScreen({required Widget child}) {
-    return TmScaffold(fullScreen: true, child: child);
+  factory TmScaffold.fullScreen({required Widget body}) {
+    return TmScaffold(fullScreen: true, body: body);
   }
 
   factory TmScaffold.nested({
     required String title,
-    required Widget child,
+    required Widget body,
     bool removePaddingTop = false,
   }) {
     return TmScaffold(
       title: title,
       nested: true,
       removePaddingTop: removePaddingTop,
-      child: child,
+      body: body,
     );
   }
 
-  final Widget child;
+  final Widget body;
   final bool fullScreen;
   final bool nested;
   final bool removePaddingTop;
   final String title;
+  final Widget? bottomNavigationBar;
 
   @override
   Widget build(BuildContext context) {
     if (fullScreen) {
-      return Scaffold(body: child);
+      return Scaffold(body: body);
     }
 
     final content = Padding(
@@ -56,7 +58,7 @@ class TmScaffold extends StatelessWidget {
             const SizedBox(height: 7),
           ],
           SizedBox(height: removePaddingTop ? 0 : 30),
-          Expanded(child: child),
+          Expanded(child: body),
         ],
       ),
     );
@@ -73,6 +75,7 @@ class TmScaffold extends StatelessWidget {
               )
             : content,
       ),
+      bottomNavigationBar: bottomNavigationBar,
     );
   }
 }
