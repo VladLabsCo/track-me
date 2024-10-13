@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:track_me/app/features/activity_timer/activity_timer.dart';
+import 'package:track_me/app/features/activity_stats/activity_stats_view.dart';
+import 'package:track_me/app/features/activity_timer/activity_timer_view.dart';
 import 'package:track_me/app/features/home/providers/home_provider.dart';
 
 class HomeAnimatedSwitcher extends ConsumerWidget {
@@ -36,10 +37,10 @@ class HomeAnimatedSwitcher extends ConsumerWidget {
         return fadeTransition;
       },
       child: homeState.when(
-        timer: () => const ActivityTimer(
+        timer: () => const ActivityTimerView(
           key: ValueKey(HomeState.timer()),
         ),
-        stats: () => const Placeholder(
+        stats: () => const ActivityStatsView(
           key: ValueKey(HomeState.stats()),
         ),
       ),

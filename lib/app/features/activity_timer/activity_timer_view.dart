@@ -3,8 +3,8 @@ import 'package:track_me/app/features/activity_timer/widgets/activity_picker.dar
 import 'package:track_me/app/features/activity_timer/widgets/activity_timeline/activity_timeline.dart';
 import 'package:track_me/app/features/activity_timer/widgets/timer/timer.dart';
 
-class ActivityTimer extends StatelessWidget {
-  const ActivityTimer({super.key});
+class ActivityTimerView extends StatelessWidget {
+  const ActivityTimerView({super.key});
 
   @override
   Widget build(BuildContext context) {
