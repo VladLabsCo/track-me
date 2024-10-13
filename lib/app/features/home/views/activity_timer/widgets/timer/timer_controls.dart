@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/core/providers/activity_stats_provider.dart';
 import 'package:track_me/app/core/providers/activity_type_provider.dart';
-import 'package:track_me/app/features/activity_timer/providers/activity_provider.dart';
-import 'package:track_me/app/features/activity_timer/providers/timer_provider.dart';
+import 'package:track_me/app/features/home/views/activity_timer/providers/activity_provider.dart';
+import 'package:track_me/app/features/home/views/activity_timer/providers/timer_provider.dart';
 import 'package:track_me/app/infrastructure/infrastucture.dart';
 
 class TimerControls extends ConsumerWidget {

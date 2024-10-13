@@ -1,3 +1,3 @@
-export 'activity_form/activity_form_view.dart';
-export 'home/home_view.dart';
-export 'login/login_view.dart';
+export 'activity_form/activity_form_screen.dart';
+export 'home/home_screen.dart';
+export 'login/login_screen.dart';

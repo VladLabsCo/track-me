@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/features/activity_form/providers/activity_form_provider.dart';
 
-class ActivityFormView extends ConsumerWidget {
-  const ActivityFormView({super.key});
+class ActivityFormScreen extends ConsumerWidget {
+  const ActivityFormScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

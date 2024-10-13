@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:track_me/app/core/providers/activity_type_provider.dart';
-import 'package:track_me/app/features/activity_timer/helpers/group_activities.dart';
-import 'package:track_me/app/features/activity_timer/providers/activity_provider.dart';
-import 'package:track_me/app/features/activity_timer/widgets/activity_timeline/activity_timeline_tile.dart';
+import 'package:track_me/app/features/home/views/activity_timer/helpers/group_activities.dart';
+import 'package:track_me/app/features/home/views/activity_timer/providers/activity_provider.dart';
+import 'package:track_me/app/features/home/views/activity_timer/widgets/activity_timeline/activity_timeline_tile.dart';
 
 class ActivityTimeline extends ConsumerWidget {
   const ActivityTimeline({super.key});

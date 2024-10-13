@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:track_me/app/features/activity_timer/providers/timer_provider.dart';
+import 'package:track_me/app/features/home/views/activity_timer/providers/timer_provider.dart';
 
 class TimerTime extends ConsumerWidget {
   const TimerTime({super.key});

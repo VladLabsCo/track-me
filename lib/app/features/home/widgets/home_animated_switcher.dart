@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:track_me/app/features/activity_stats/activity_stats_view.dart';
-import 'package:track_me/app/features/activity_timer/activity_timer_view.dart';
 import 'package:track_me/app/features/home/providers/home_provider.dart';
+import 'package:track_me/app/features/home/views/activity_stats/activity_stats_view.dart';
+import 'package:track_me/app/features/home/views/activity_timer/activity_timer_view.dart';
 
 class HomeAnimatedSwitcher extends ConsumerWidget {
   const HomeAnimatedSwitcher({super.key});
