@@ -47,6 +47,7 @@ class ActivityFormView extends ConsumerWidget {
           ),
           Center(
             child: TmButton(
+              padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
               label: 'Save',
               onPressed: handleSubmit,
             ),
