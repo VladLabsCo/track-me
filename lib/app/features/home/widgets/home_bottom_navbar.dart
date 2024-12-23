@@ -65,7 +65,7 @@ class _HomeBottomNavbarButton extends ConsumerWidget {
           child: Icon(
             icon,
             size: 34,
-            color: isActive ? Theme.of(context).primaryColor : null,
+            color: isActive ? Theme.of(context).primaryColor : Colors.white,
           ),
         ),
       ),
