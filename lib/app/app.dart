@@ -18,7 +18,11 @@ class App extends StatelessWidget {
               ),
               labelMedium: const TextStyle(
                 fontSize: 18,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
+              ),
+              labelSmall: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
               ),
               bodyMedium: const TextStyle(
                 fontSize: 18,

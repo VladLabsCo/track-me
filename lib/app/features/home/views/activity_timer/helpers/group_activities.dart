@@ -6,20 +6,19 @@ bool _isSameDay(DateTime date1, DateTime date2) {
       date1.day == date2.day;
 }
 
-Map<String, List<Activity>> groupActivities(List<Activity> activities) {
+List<MapEntry<String, List<Activity>>> groupActivities(
+  List<Activity> activities,
+) {
   final now = DateTime.now();
   final todayDate = DateTime(now.year, now.month, now.day);
   final yesterdayDate = todayDate.subtract(const Duration(days: 1));
   final startOfWeekDate = todayDate.subtract(
     Duration(days: todayDate.weekday - 1),
   );
-  final startOfMonthDate = DateTime(now.year, now.month);
 
   final today = <Activity>[];
   final yesterday = <Activity>[];
   final week = <Activity>[];
-  final month = <Activity>[];
-  final other = <Activity>[];
 
   final thirtyDaysAgo = now.subtract(const Duration(days: 30));
   final last30DaysActivities = activities.where(
@@ -37,20 +36,12 @@ Map<String, List<Activity>> groupActivities(List<Activity> activities) {
         (activityDate.isBefore(todayDate) ||
             _isSameDay(activityDate, startOfWeekDate))) {
       week.add(activity);
-    } else if (activityDate.isAfter(startOfMonthDate) &&
-        (activityDate.isBefore(startOfWeekDate) ||
-            _isSameDay(activityDate, startOfMonthDate))) {
-      month.add(activity);
-    } else {
-      other.add(activity);
     }
   }
 
   return {
-    'Today': today,
+    'Today': today.reversed.toList(),
     'Yesterday': yesterday,
     'This week': week,
-    'This month': month,
-    'Past months': other,
-  };
+  }.entries.toList();
 }

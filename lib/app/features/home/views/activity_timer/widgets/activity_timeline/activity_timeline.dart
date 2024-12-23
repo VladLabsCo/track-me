@@ -18,31 +18,42 @@ class ActivityTimeline extends ConsumerWidget {
       activityTypeNotifierProvider.select((state) => state.activityTypes),
     );
 
-    final groupedActivitiesEntries =
-        groupActivities(activities).entries.toList();
+    final groupedActivities = groupActivities(activities);
 
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            for (final group in groupedActivitiesEntries)
-              if (group.value.isNotEmpty) ...[
-                Text(group.key),
-                const SizedBox(
-                  height: 10,
-                ),
-                for (final activity in group.value) ...[
-                  ActivityTimelineTile(
-                    activity: activity,
-                    activityType: activityTypes.firstWhere(
-                      (activityType) =>
-                          activityType.id == activity.activityTypeId,
-                    ),
+            if (groupedActivities.isNotEmpty)
+              const SizedBox(
+                width: double.infinity,
+                child: Text(
+                  'New week, new hustle...',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.grey,
                   ),
-                  const SizedBox(height: 10),
+                ),
+              )
+            else
+              for (final group in groupedActivities)
+                if (group.value.isNotEmpty) ...[
+                  Text(group.key),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  for (final activity in group.value) ...[
+                    ActivityTimelineTile(
+                      activity: activity,
+                      activityType: activityTypes.firstWhere(
+                        (activityType) =>
+                            activityType.id == activity.activityTypeId,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                  ],
                 ],
-              ],
           ],
         ),
       ),

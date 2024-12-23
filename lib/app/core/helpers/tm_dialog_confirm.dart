@@ -11,6 +11,7 @@ Future<void> tmDialogConfirm({
   final hasAccepted = await showDialog<bool>(
     context: context,
     builder: (context) => AlertDialog(
+      backgroundColor: Theme.of(context).cardColor,
       title: Text(title),
       content: Text(subtitle),
       actions: [

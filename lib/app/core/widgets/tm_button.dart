@@ -1,48 +1,81 @@
 import 'package:flutter/material.dart';
 
+enum TmButtonSize {
+  normal,
+  small,
+}
+
 class TmButton extends StatelessWidget {
-  const TmButton({
-    required this.label,
+  const TmButton(
+    this.label, {
     required this.onPressed,
-    this.padding = const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
     this.outlined = false,
+    this.size = TmButtonSize.normal,
+    this.padding,
+    this.rightIcon,
     super.key,
   });
 
   final String label;
   final VoidCallback onPressed;
-  final EdgeInsetsGeometry padding;
   final bool outlined;
+  final TmButtonSize size;
+  final EdgeInsetsGeometry? padding;
+  final Widget? rightIcon;
 
   @override
   Widget build(BuildContext context) {
-    final borderRadius = outlined ? 30.0 : 9.0;
-
     final backgroundColor =
         outlined ? Colors.transparent : Theme.of(context).primaryColor;
 
     final side = outlined
         ? BorderSide(
             color: Theme.of(context).primaryColor,
-            width: 2,
           )
         : null;
+
+    var sizePadding = padding ??
+        const EdgeInsets.symmetric(
+          horizontal: 25,
+          vertical: 15,
+        );
+    if (size == TmButtonSize.small && padding == null) {
+      sizePadding = const EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 5,
+      );
+    }
+
+    var textStyle = Theme.of(context).textTheme.labelMedium;
+    if (size == TmButtonSize.small) {
+      textStyle = Theme.of(context).textTheme.labelSmall;
+    }
 
     return TextButton(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
+          borderRadius: BorderRadius.circular(20),
         ),
         side: side,
         elevation: 0,
         backgroundColor: backgroundColor,
         foregroundColor: Colors.white,
-        padding: padding,
+        padding: sizePadding,
+        minimumSize: Size.zero,
       ),
       onPressed: onPressed,
-      child: Text(
-        label,
-        style: Theme.of(context).textTheme.labelMedium,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            label,
+            style: textStyle,
+          ),
+          if (rightIcon != null) ...[
+            const SizedBox(width: 4),
+            rightIcon!,
+          ],
+        ],
       ),
     );
   }

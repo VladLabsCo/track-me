@@ -29,8 +29,8 @@ class LoginForm extends ConsumerWidget {
         ),
         const SizedBox(height: 25),
         TmButton(
-          label: 'START',
           onPressed: handleLogin,
+          'START',
         ),
       ],
     );
