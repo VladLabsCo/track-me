@@ -106,8 +106,10 @@ class _ActivityPickerPopupState extends State<_ActivityPickerPopup> {
             if (activitiesLength == 0) ...[
               const SizedBox(height: 12),
               Text(
-                'No activity yet. Press on "Done" to create one.',
-                style: Theme.of(context).textTheme.bodySmall,
+                'No activity yet. Press "Done" to create one.',
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: Colors.grey,
+                    ),
                 textAlign: TextAlign.center,
               ),
             ],

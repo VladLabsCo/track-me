@@ -18,7 +18,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   // - System graphical options -
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.light,
     ),
   );
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
