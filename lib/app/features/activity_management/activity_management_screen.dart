@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:track_me/app/core/core.dart';
+import 'package:track_me/app/features/activity_management/widgets/activity_types_list.dart';
 
-class ActivityStatsView extends StatelessWidget {
-  const ActivityStatsView({super.key});
+class ActivityManagementScreen extends StatelessWidget {
+  const ActivityManagementScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.expand(
-      child: SingleChildScrollView(
+    return TmScaffold.nested(
+      title: 'Manage Activities',
+      body: SizedBox.expand(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Options',
+              'Your activities',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 16),
-            TmButton(
-              label: 'Manage Activities',
-              onPressed: () => context.go('/type-management'),
-              outlined: true,
-            ),
+            const ActivityTypesList(),
           ],
         ),
       ),

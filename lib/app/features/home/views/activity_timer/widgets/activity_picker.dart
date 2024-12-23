@@ -30,7 +30,7 @@ class ActivityPicker extends ConsumerWidget {
 
       if (selectedActivityTypeId != null) {
         if (selectedActivityTypeId == '0') {
-          if (context.mounted) context.go('/activity-form');
+          if (context.mounted) context.go('/new-type');
         } else {
           ref
               .read(activityTypeNotifierProvider.notifier)

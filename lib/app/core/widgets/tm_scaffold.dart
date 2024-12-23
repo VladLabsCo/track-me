@@ -57,7 +57,7 @@ class TmScaffold extends StatelessWidget {
             const TmLogo(),
             const SizedBox(height: 7),
           ],
-          SizedBox(height: removePaddingTop ? 0 : 30),
+          SizedBox(height: removePaddingTop ? 0 : 20),
           Expanded(child: body),
         ],
       ),
