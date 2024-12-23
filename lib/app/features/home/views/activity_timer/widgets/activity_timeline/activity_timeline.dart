@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:track_me/app/core/providers/activity_type_provider.dart';
 import 'package:track_me/app/features/home/views/activity_timer/helpers/group_activities.dart';
