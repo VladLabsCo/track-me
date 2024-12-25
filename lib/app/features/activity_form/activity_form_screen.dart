@@ -16,19 +16,11 @@ class ActivityFormScreen extends ConsumerWidget {
     }
 
     return TmScaffold.nested(
-      removePaddingTop: true,
       title: 'New Activity',
+      subtitle: 'Insert all information to create a new activity.',
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'This is were you can create new activities.',
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.white.withAlpha(180),
-            ),
-          ),
-          const SizedBox(height: 30),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -46,11 +38,7 @@ class ActivityFormScreen extends ConsumerWidget {
             ),
           ),
           Center(
-            child: TmButton(
-              // padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
-              onPressed: handleSubmit,
-              'Save',
-            ),
+            child: TmButton(onPressed: handleSubmit, 'Save'),
           ),
         ],
       ),

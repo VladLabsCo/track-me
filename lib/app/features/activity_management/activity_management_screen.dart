@@ -14,7 +14,7 @@ class ActivityManagementScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Your activities',
+              'Your activities (in development...)',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 16),

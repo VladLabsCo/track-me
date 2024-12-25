@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:track_me/app/core/providers/activity_type_provider.dart';
+import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/features/home/views/activity_timer/helpers/group_activities.dart';
-import 'package:track_me/app/features/home/views/activity_timer/providers/activity_provider.dart';
 import 'package:track_me/app/features/home/views/activity_timer/widgets/activity_timeline/activity_timeline_tile.dart';
 
 class ActivityTimeline extends ConsumerWidget {
@@ -14,7 +13,7 @@ class ActivityTimeline extends ConsumerWidget {
       activityNotifierProvider.select((state) => state.activities),
     );
     final activityTypes = ref.watch(
-      activityTypeNotifierProvider.select((state) => state.activityTypes),
+      activityTypeNotifierProvider.select((state) => state.types),
     );
 
     final groupedActivities = groupActivities(activities);
@@ -24,7 +23,7 @@ class ActivityTimeline extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (groupedActivities.isNotEmpty)
+            if (groupedActivities.isEmpty)
               const SizedBox(
                 width: double.infinity,
                 child: Text(

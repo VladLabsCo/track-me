@@ -1,6 +1,5 @@
 import 'package:hive/hive.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/infrastructure/hive/hive.dart';
 
 part 'activity_stats_hive_provider.g.dart';
@@ -18,10 +17,8 @@ class ActivityStatsHive extends _$ActivityStatsHive
 
   @override
   Future<String> create(ActivityStatsCreateDto activityStatsCreateDto) async {
-    final newActivityStats = ActivityStats(
-      id: tmUuid(),
-      activityTypeId: activityStatsCreateDto.activityTypeId,
-      totalDuration: Duration.zero,
+    final newActivityStats = ActivityStats.fromActivityTypeId(
+      activityStatsCreateDto.activityTypeId,
     );
 
     await getBox().add(newActivityStats);

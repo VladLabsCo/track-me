@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:track_me/app/core/providers/activity_type_provider.dart';
+import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/infrastructure/infrastucture.dart';
 
 part 'activity_form_provider.freezed.dart';

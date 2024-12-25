@@ -7,8 +7,8 @@ class TmScaffold extends StatelessWidget {
     required this.body,
     this.fullScreen = false,
     this.nested = false,
-    this.removePaddingTop = false,
     this.title = '',
+    this.subtitle = '',
     this.bottomNavigationBar,
     super.key,
   });
@@ -20,21 +20,21 @@ class TmScaffold extends StatelessWidget {
   factory TmScaffold.nested({
     required String title,
     required Widget body,
-    bool removePaddingTop = false,
+    String subtitle = '',
   }) {
     return TmScaffold(
-      title: title,
       nested: true,
-      removePaddingTop: removePaddingTop,
+      title: title,
       body: body,
+      subtitle: subtitle,
     );
   }
 
   final Widget body;
   final bool fullScreen;
   final bool nested;
-  final bool removePaddingTop;
   final String title;
+  final String subtitle;
   final Widget? bottomNavigationBar;
 
   @override
@@ -42,6 +42,11 @@ class TmScaffold extends StatelessWidget {
     if (fullScreen) {
       return Scaffold(body: body);
     }
+
+    final descriptionStyle = Theme.of(context)
+        .textTheme
+        .bodySmall!
+        .copyWith(color: Colors.white.withAlpha(180));
 
     final content = Padding(
       padding: const EdgeInsets.only(
@@ -52,12 +57,17 @@ class TmScaffold extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (subtitle.isNotEmpty)
+            SizedBox(
+              width: double.infinity,
+              child: Text(subtitle, style: descriptionStyle),
+            ),
           if (!nested) ...[
             const SizedBox(height: 12),
             const TmLogo(),
             const SizedBox(height: 7),
           ],
-          SizedBox(height: removePaddingTop ? 0 : 20),
+          const SizedBox(height: 20),
           Expanded(child: body),
         ],
       ),
@@ -70,6 +80,7 @@ class TmScaffold extends StatelessWidget {
                 children: [
                   const SizedBox(height: 4),
                   NestedHeader(title: title),
+                  const SizedBox(height: 4),
                   Expanded(child: content),
                 ],
               )

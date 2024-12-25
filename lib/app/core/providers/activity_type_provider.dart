@@ -8,18 +8,18 @@ part 'activity_type_provider.g.dart';
 @freezed
 class ActivityTypeState with _$ActivityTypeState {
   const factory ActivityTypeState({
-    required List<ActivityType> activityTypes,
+    required List<ActivityType> types,
     String? activeId,
   }) = _ActivityTypeState;
 
-  factory ActivityTypeState.inital(List<ActivityType> activityTypes) {
-    return ActivityTypeState(activityTypes: activityTypes);
+  factory ActivityTypeState.inital(List<ActivityType> types) {
+    return ActivityTypeState(types: types);
   }
 }
 
-extension ActivityStateMethods on ActivityTypeState {
-  ActivityTypeState setActivityTypes(List<ActivityType> activities) {
-    return copyWith(activityTypes: activities);
+extension ActivityTypeStateMethods on ActivityTypeState {
+  ActivityTypeState setActivityTypes(List<ActivityType> types) {
+    return copyWith(types: types);
   }
 
   ActivityTypeState setActive(String? id) {

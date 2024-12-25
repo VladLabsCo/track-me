@@ -40,10 +40,7 @@ class TmButton extends StatelessWidget {
           vertical: 15,
         );
     if (size == TmButtonSize.small && padding == null) {
-      sizePadding = const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 5,
-      );
+      sizePadding = const EdgeInsets.all(12);
     }
 
     var textStyle = Theme.of(context).textTheme.labelMedium;

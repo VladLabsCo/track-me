@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:track_me/app/core/providers/activity_type_provider.dart';
+import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/infrastructure/infrastucture.dart';
 
 class ActivityPicker extends ConsumerWidget {
@@ -11,7 +11,7 @@ class ActivityPicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final activityTypeState = ref.watch(activityTypeNotifierProvider);
-    final activityTypes = activityTypeState.activityTypes;
+    final activityTypes = activityTypeState.types;
     final activeId = activityTypeState.activeId;
 
     final activeIndex = activeId != null
