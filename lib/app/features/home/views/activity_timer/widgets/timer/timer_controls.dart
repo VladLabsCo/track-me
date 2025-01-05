@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,10 +17,29 @@ class TimerControls extends ConsumerWidget {
 
     final isRunning = clockState == TimerClockState.running;
 
+    void createNotification() {
+      AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: 1,
+          channelKey: 'ongoing_channel',
+          title: 'Ongoing Activity',
+          body: ref.read(activityTypeNotifierProvider).active!.name,
+          category: NotificationCategory.Reminder,
+          autoDismissible: false,
+          locked: true,
+        ),
+      );
+    }
+
+    Future<void> cancelNotification() async {
+      await AwesomeNotifications().cancel(1);
+    }
+
     void handlePlayPauseClick() {
       switch (clockState) {
         case TimerClockState.initial:
           ref.read(timerNotifierProvider.notifier).start();
+          createNotification();
         case TimerClockState.running:
           ref.read(timerNotifierProvider.notifier).pause();
         case TimerClockState.paused:
@@ -36,7 +56,7 @@ class TimerControls extends ConsumerWidget {
         accept: 'Yes!',
         onAccepted: () async {
           final timerState = ref.read(timerNotifierProvider);
-          final activeTypeId = ref.read(activityTypeNotifierProvider).activeId;
+          final activeType = ref.read(activityTypeNotifierProvider).active;
 
           ref.read(timerNotifierProvider.notifier).stop();
           ref.read(activityTypeNotifierProvider.notifier).setActive(null);
@@ -59,16 +79,18 @@ class TimerControls extends ConsumerWidget {
 
           await ref.read(activityHiveProvider.notifier).create(
                 ActivityCreateDto(
-                  activityTypeId: activeTypeId!,
+                  activityTypeId: activeType!.id,
                   duration: totalDuration,
                 ),
               );
 
           await ref
               .read(activityStatsNotifierProvider.notifier)
-              .registerTimer(activeTypeId, totalDuration);
+              .registerTimer(activeType.id, totalDuration);
 
           ref.invalidate(activityNotifierProvider);
+
+          await cancelNotification();
         },
       );
     }
@@ -80,7 +102,10 @@ class TimerControls extends ConsumerWidget {
         subtitle: 'Are you sure you want to discard your progress?',
         deny: 'Oops, go back',
         accept: 'Yes, cancel it!',
-        onAccepted: ref.read(timerNotifierProvider.notifier).stop,
+        onAccepted: () async {
+          ref.read(timerNotifierProvider.notifier).stop();
+          await cancelNotification();
+        },
       );
     }
 
@@ -103,7 +128,7 @@ class TimerControls extends ConsumerWidget {
         ),
         const SizedBox(width: 25),
         TmIconButton(
-          disabled: ref.watch(activityTypeNotifierProvider).activeId == null,
+          disabled: ref.watch(activityTypeNotifierProvider).active == null,
           shadowColor: Theme.of(context).primaryColor,
           onPressed: handlePlayPauseClick,
           child: Transform.translate(

@@ -45,7 +45,7 @@ abstract class HiveBoxDocument {
 
 abstract class HiveProviderBase<T extends HiveBoxDocument, X, Y> {
   Box<T> getBox();
-  Future<String> create(X activityCreateDto);
+  Future<T> create(X activityCreateDto);
   Future<String> update(String id, Y activityUpdateDto);
 }
 

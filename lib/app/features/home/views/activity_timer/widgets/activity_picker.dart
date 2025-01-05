@@ -16,15 +16,15 @@ class ActivityPicker extends ConsumerWidget {
     );
     final activityTypeState = ref.watch(activityTypeNotifierProvider);
     final activityTypes = activityTypeState.types;
-    final activeId = activityTypeState.activeId;
+    final activeType = activityTypeState.active;
 
-    final activeIndex = activeId != null
+    final activeIndex = activeType != null
         ? activityTypes
-            .indexWhere((activityType) => activityType.id == activeId)
+            .indexWhere((activityType) => activityType.id == activeType.id)
         : null;
 
     Future<void> showDialog() async {
-      final selectedActivityTypeId = await showCupertinoModalPopup<String>(
+      final result = await showCupertinoModalPopup<(bool, ActivityType?)?>(
         context: context,
         builder: (BuildContext context) => _ActivityPickerPopup(
           activityTypes: activityTypes,
@@ -32,13 +32,11 @@ class ActivityPicker extends ConsumerWidget {
         ),
       );
 
-      if (selectedActivityTypeId != null) {
-        if (selectedActivityTypeId == '0') {
+      if (result != null) {
+        if (result.$1) {
           if (context.mounted) context.go('/new-type');
         } else {
-          ref
-              .read(activityTypeNotifierProvider.notifier)
-              .setActive(selectedActivityTypeId);
+          ref.read(activityTypeNotifierProvider.notifier).setActive(result.$2);
         }
       }
     }
@@ -91,9 +89,11 @@ class _ActivityPickerPopupState extends State<_ActivityPickerPopup> {
 
     void handleDone() {
       if (_selectedItemIndex + 1 > activitiesLength) {
-        Navigator.of(context).pop('0');
+        Navigator.of(context).pop((true, null));
       } else {
-        Navigator.of(context).pop(widget.activityTypes[_selectedItemIndex].id);
+        Navigator.of(context).pop(
+          (false, widget.activityTypes[_selectedItemIndex]),
+        );
       }
     }
 

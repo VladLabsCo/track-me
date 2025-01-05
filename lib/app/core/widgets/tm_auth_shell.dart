@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -24,7 +25,17 @@ class _TmAuthShellState extends ConsumerState<TmAuthShell> {
     final user = ref.watch(userNotifierProvider);
 
     return user.when(
-      logged: (_) => widget.child,
+      logged: (_) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+            if (!isAllowed) {
+              AwesomeNotifications().requestPermissionToSendNotifications();
+            }
+          });
+        });
+
+        return widget.child;
+      },
       unlogged: () {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           context.replace('/login');

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,6 +15,23 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await initHive();
+
+  await AwesomeNotifications().initialize(
+    'resource://drawable/ic_launcher',
+    [
+      NotificationChannel(
+        channelKey: 'ongoing_channel',
+        channelName: 'Ongoing Notifications',
+        channelDescription: 'Notifications that cannot be dismissed',
+        importance: NotificationImportance.Max,
+        channelShowBadge: false,
+        enableVibration: false,
+        onlyAlertOnce: true,
+        playSound: false,
+        locked: true,
+      ),
+    ],
+  );
 
   // - System graphical options -
   SystemChrome.setSystemUIOverlayStyle(

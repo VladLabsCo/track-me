@@ -16,14 +16,16 @@ class ActivityStatsHive extends _$ActivityStatsHive
   Box<ActivityStats> getBox() => Hive.box<ActivityStats>(activityStatsBox);
 
   @override
-  Future<String> create(ActivityStatsCreateDto activityStatsCreateDto) async {
+  Future<ActivityStats> create(
+    ActivityStatsCreateDto activityStatsCreateDto,
+  ) async {
     final newActivityStats = ActivityStats.fromActivityTypeId(
       activityStatsCreateDto.activityTypeId,
     );
 
     await getBox().add(newActivityStats);
 
-    return newActivityStats.id;
+    return newActivityStats;
   }
 
   @override

@@ -17,7 +17,7 @@ class ActivityTypeHive extends _$ActivityTypeHive
   Box<ActivityType> getBox() => Hive.box<ActivityType>(activityTypeBox);
 
   @override
-  Future<String> create(ActivityTypeCreateDto activityCreateDto) async {
+  Future<ActivityType> create(ActivityTypeCreateDto activityCreateDto) async {
     final activity = ActivityType(
       id: tmUuid(),
       name: activityCreateDto.name,
@@ -27,7 +27,7 @@ class ActivityTypeHive extends _$ActivityTypeHive
 
     await getBox().add(activity);
 
-    return activity.id;
+    return activity;
   }
 
   @override

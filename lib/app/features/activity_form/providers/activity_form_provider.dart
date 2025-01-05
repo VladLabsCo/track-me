@@ -31,17 +31,17 @@ class ActivityForm extends _$ActivityForm {
   Future<bool> submit() async {
     if (state.name.isEmpty) return false;
 
-    final activityTypeId = await ref
+    final activityType = await ref
         .read(activityTypeHiveProvider.notifier)
         .create(ActivityTypeCreateDto(name: state.name));
 
     await ref
         .read(activityStatsHiveProvider.notifier)
-        .create(ActivityStatsCreateDto(activityTypeId: activityTypeId));
+        .create(ActivityStatsCreateDto(activityTypeId: activityType.id));
 
     ref.read(activityTypeNotifierProvider.notifier)
       ..getAll()
-      ..setActive(activityTypeId);
+      ..setActive(activityType);
 
     return true;
   }

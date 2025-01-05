@@ -9,7 +9,7 @@ part 'activity_type_provider.g.dart';
 class ActivityTypeState with _$ActivityTypeState {
   const factory ActivityTypeState({
     required List<ActivityType> types,
-    String? activeId,
+    ActivityType? active,
   }) = _ActivityTypeState;
 
   factory ActivityTypeState.inital(List<ActivityType> types) {
@@ -22,8 +22,8 @@ extension ActivityTypeStateMethods on ActivityTypeState {
     return copyWith(types: types);
   }
 
-  ActivityTypeState setActive(String? id) {
-    return copyWith(activeId: id);
+  ActivityTypeState setActive(ActivityType? active) {
+    return copyWith(active: active);
   }
 }
 
@@ -42,5 +42,5 @@ class ActivityTypeNotifier extends _$ActivityTypeNotifier {
     );
   }
 
-  void setActive(String? id) => state = state.setActive(id);
+  void setActive(ActivityType? active) => state = state.setActive(active);
 }
