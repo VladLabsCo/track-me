@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:track_me/app/core/core.dart';
+import 'package:track_me/app/features/home/views/activity_timer/providers/timer_provider.dart';
 import 'package:track_me/app/infrastructure/infrastucture.dart';
 
 class ActivityPicker extends ConsumerWidget {
@@ -10,6 +11,9 @@ class ActivityPicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final timerState = ref.watch(
+      timerNotifierProvider.select((s) => s.clockState),
+    );
     final activityTypeState = ref.watch(activityTypeNotifierProvider);
     final activityTypes = activityTypeState.types;
     final activeId = activityTypeState.activeId;
@@ -42,16 +46,17 @@ class ActivityPicker extends ConsumerWidget {
     return Center(
       child: OutlinedButton(
         style: ElevatedButton.styleFrom(
-          side: BorderSide(width: 0.5, color: Colors.white.withOpacity(0.5)),
+          side: const BorderSide(width: 0.5, color: Colors.white54),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(100),
           ),
           elevation: 0,
-          backgroundColor: Colors.white.withOpacity(0.2),
+          backgroundColor: Colors.white12,
+          disabledBackgroundColor: Colors.white10,
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 20),
         ),
-        onPressed: showDialog,
+        onPressed: timerState == TimerClockState.initial ? showDialog : null,
         child: Text(
           activeIndex != null
               ? activityTypes[activeIndex].name
@@ -106,7 +111,7 @@ class _ActivityPickerPopupState extends State<_ActivityPickerPopup> {
             if (activitiesLength == 0) ...[
               const SizedBox(height: 12),
               Text(
-                'No activity yet. Press "Done" to create one.',
+                "No activities yet. Tap 'Done' to add one.",
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: Colors.grey,
                     ),

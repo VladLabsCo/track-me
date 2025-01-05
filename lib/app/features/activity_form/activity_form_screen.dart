@@ -17,7 +17,7 @@ class ActivityFormScreen extends ConsumerWidget {
 
     return TmScaffold.nested(
       title: 'New Activity',
-      subtitle: 'Insert all information to create a new activity.',
+      subtitle: 'Enter all details to create a new activity.',
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
