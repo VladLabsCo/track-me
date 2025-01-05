@@ -1,6 +1,6 @@
 name: track_me
 description: A Flutter app
-version: 0.2.2+9
+version: 0.3.0+10
 publish_to: none
 
 environment:
