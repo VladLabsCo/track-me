@@ -17,6 +17,7 @@ class LoginForm extends ConsumerWidget {
 
     return Column(
       children: [
+        const SizedBox(height: 20),
         TmInput(
           keyboardType: TextInputType.emailAddress,
           label: 'Name',
@@ -26,10 +27,10 @@ class LoginForm extends ConsumerWidget {
           ),
           onChanged: ref.watch(loginNotifierProvider.notifier).setName,
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: 25),
         TmButton(
-          label: 'START',
           onPressed: handleLogin,
+          'START',
         ),
       ],
     );

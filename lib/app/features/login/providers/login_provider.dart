@@ -10,22 +10,22 @@ class LoginState with _$LoginState {
   const factory LoginState({
     required String name,
   }) = _LoginState;
+
+  factory LoginState.initial() => const LoginState(name: '');
 }
 
 extension LoginStateMethods on LoginState {
-  LoginState setName(String newName) {
-    return copyWith(name: newName);
+  LoginState setName(String name) {
+    return copyWith(name: name);
   }
 }
 
 @riverpod
 class LoginNotifier extends _$LoginNotifier {
   @override
-  LoginState build() => const LoginState(name: '');
+  LoginState build() => LoginState.initial();
 
-  void setName(String newName) {
-    state = state.setName(newName);
-  }
+  void setName(String name) => state = state.setName(name);
 
   Future<void> logIn() async {
     return ref.read(userNotifierProvider.notifier).logIn(state.name);

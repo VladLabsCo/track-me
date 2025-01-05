@@ -8,6 +8,8 @@ class TmIconButton extends StatelessWidget {
     this.backgroundColor,
     this.shadowColor,
     this.padding,
+    this.disabled,
+    this.disabledOpacity,
     super.key,
   });
 
@@ -17,19 +19,33 @@ class TmIconButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? shadowColor;
   final double? padding;
+  final bool? disabled;
+  final double? disabledOpacity;
 
   @override
   Widget build(BuildContext context) {
-    final buttonWidget = FilledButton(
+    Widget buttonWidget = FilledButton(
       style: FilledButton.styleFrom(
         minimumSize: Size.zero,
         backgroundColor: backgroundColor ?? Theme.of(context).primaryColor,
+        disabledBackgroundColor:
+            backgroundColor ?? Theme.of(context).primaryColor,
         padding: EdgeInsets.all(padding ?? 20),
       ),
-      onPressed: onPressed,
-      onLongPress: onLongPress,
+      onPressed: (disabled ?? false) ? null : onPressed,
+      onLongPress: (disabled ?? false) ? null : onLongPress,
       child: child,
     );
+
+    if (disabled != null) {
+      buttonWidget = AnimatedOpacity(
+        duration: const Duration(milliseconds: 150),
+        opacity: disabled! ? (disabledOpacity ?? 0.5) : 1.0,
+        child: buttonWidget,
+      );
+
+      if (disabled!) return buttonWidget;
+    }
 
     if (shadowColor != null) {
       return Container(

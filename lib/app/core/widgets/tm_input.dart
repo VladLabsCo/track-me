@@ -23,8 +23,8 @@ class TmInput extends StatelessWidget {
       style: const TextStyle(fontSize: 15, color: Colors.white),
       decoration: InputDecoration(
         hintText: label,
-        hintStyle: const TextStyle(
-          color: Colors.white,
+        hintStyle: TextStyle(
+          color: Colors.white.withAlpha(180),
           fontSize: 15,
           fontWeight: FontWeight.w400,
         ),
