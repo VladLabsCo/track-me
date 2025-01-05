@@ -19,12 +19,12 @@ class ActivityStatsList extends ConsumerWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            ...types.map(
-              (type) => ActivityStatsTile(
-                type: type,
-                stats: stats.firstWhere(
-                  (stats) => stats.activityTypeId == type.id,
+            ...stats.map(
+              (stat) => ActivityStatsTile(
+                type: types.firstWhere(
+                  (type) => type.id == stat.activityTypeId,
                 ),
+                stats: stat,
               ),
             ),
           ],
