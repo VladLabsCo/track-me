@@ -45,8 +45,6 @@ class ActivityStats extends HiveObject implements HiveBoxDocument {
   final DateTime? lastUpdate;
 }
 
-extension ActivityStatsMethods on ActivityStats {}
-
 class ActivityStatsCreateDto {
   const ActivityStatsCreateDto({
     required this.activityTypeId,

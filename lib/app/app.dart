@@ -54,5 +54,7 @@ final theme = ThemeData(
   primaryColor: const Color(0xFFF5004F),
   cardColor: const Color(0xFF202122),
   scaffoldBackgroundColor: const Color(0xFF0D0E0F),
-  dialogBackgroundColor: const Color(0xFF202122),
+  dialogTheme: const DialogThemeData(
+    backgroundColor: Color(0xFF202122),
+  ),
 );

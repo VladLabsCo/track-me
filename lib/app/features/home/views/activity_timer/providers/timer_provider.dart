@@ -23,18 +23,23 @@ class TimerState with _$TimerState {
   }
 }
 
-extension TimerStateMethods on TimerState {
-  TimerState start() {
-    return copyWith(
+@Riverpod(keepAlive: true)
+class TimerNotifier extends _$TimerNotifier {
+  @override
+  TimerState build() => TimerState.initial();
+
+  void start() {
+    state = state.copyWith(
       clockState: TimerClockState.running,
       runDate: DateTime.now(),
     );
   }
 
-  TimerState pause(DateTime runDate, Duration prevDurationAtPause) {
-    final duration = DateTime.now().difference(runDate) + prevDurationAtPause;
+  void pause() {
+    final duration =
+        DateTime.now().difference(state.runDate!) + state.durationAtPause;
 
-    return copyWith(
+    state = state.copyWith(
       clockState: TimerClockState.paused,
       durationAtPause: Duration(
         days: duration.inDays,
@@ -46,28 +51,12 @@ extension TimerStateMethods on TimerState {
     );
   }
 
-  TimerState resume() {
-    return copyWith(
+  void resume() {
+    state = state.copyWith(
       clockState: TimerClockState.running,
       runDate: DateTime.now(),
     );
   }
 
-  TimerState stop() {
-    return TimerState.initial();
-  }
-}
-
-@Riverpod(keepAlive: true)
-class TimerNotifier extends _$TimerNotifier {
-  @override
-  TimerState build() => TimerState.initial();
-
-  void start() => state = state.start();
-
-  void pause() => state = state.pause(state.runDate!, state.durationAtPause);
-
-  void resume() => state = state.resume();
-
-  void stop() => state = state.stop();
+  void stop() => state = TimerState.initial();
 }

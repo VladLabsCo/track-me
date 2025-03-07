@@ -15,18 +15,12 @@ class ActivityFormState with _$ActivityFormState {
   factory ActivityFormState.initial() => const ActivityFormState(name: '');
 }
 
-extension ActivityFormStateMethods on ActivityFormState {
-  ActivityFormState setName(String name) {
-    return copyWith(name: name);
-  }
-}
-
 @riverpod
 class ActivityForm extends _$ActivityForm {
   @override
   ActivityFormState build() => ActivityFormState.initial();
 
-  void setName(String name) => state = state.setName(name);
+  void setName(String name) => state = state.copyWith(name: name);
 
   Future<bool> submit() async {
     if (state.name.isEmpty) return false;

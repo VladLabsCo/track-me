@@ -17,16 +17,6 @@ class ActivityTypeState with _$ActivityTypeState {
   }
 }
 
-extension ActivityTypeStateMethods on ActivityTypeState {
-  ActivityTypeState setActivityTypes(List<ActivityType> types) {
-    return copyWith(types: types);
-  }
-
-  ActivityTypeState setActive(ActivityType? active) {
-    return copyWith(active: active);
-  }
-}
-
 @Riverpod(keepAlive: true)
 class ActivityTypeNotifier extends _$ActivityTypeNotifier {
   @override
@@ -37,10 +27,12 @@ class ActivityTypeNotifier extends _$ActivityTypeNotifier {
   }
 
   void getAll() {
-    state = state.setActivityTypes(
-      ref.read(activityTypeHiveProvider.notifier).getAll(),
+    state = state.copyWith(
+      types: ref.read(activityTypeHiveProvider.notifier).getAll(),
     );
   }
 
-  void setActive(ActivityType? active) => state = state.setActive(active);
+  void setActive(ActivityType? activityType) {
+    state = state.copyWith(active: activityType);
+  }
 }

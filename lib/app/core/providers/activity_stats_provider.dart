@@ -16,12 +16,6 @@ class ActivityStatsState with _$ActivityStatsState {
   }
 }
 
-extension ActivityStatsStateMethods on ActivityStatsState {
-  ActivityStatsState setStats(List<ActivityStats> stats) {
-    return copyWith(stats: stats);
-  }
-}
-
 @riverpod
 class ActivityStatsNotifier extends _$ActivityStatsNotifier {
   @override

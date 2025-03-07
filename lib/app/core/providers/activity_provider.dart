@@ -17,12 +17,6 @@ class ActivityState with _$ActivityState {
   }
 }
 
-extension ActivityStateMethods on ActivityState {
-  ActivityState setActivities(List<Activity> activities) {
-    return copyWith(activities: activities);
-  }
-}
-
 @riverpod
 class ActivityNotifier extends _$ActivityNotifier {
   @override
