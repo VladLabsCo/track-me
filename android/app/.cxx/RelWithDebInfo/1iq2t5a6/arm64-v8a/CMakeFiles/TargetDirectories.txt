@@ -1,2 +1,0 @@
-/Users/vladi/Personal/projects/track-me/android/app/.cxx/RelWithDebInfo/1iq2t5a6/arm64-v8a/CMakeFiles/edit_cache.dir
-/Users/vladi/Personal/projects/track-me/android/app/.cxx/RelWithDebInfo/1iq2t5a6/arm64-v8a/CMakeFiles/rebuild_cache.dir

@@ -1,1 +1,0 @@
-/Users/vladi/Personal/projects/track-me/build/app/intermediates/cxx/RelWithDebInfo/1iq2t5a6/obj/arm64-v8a
