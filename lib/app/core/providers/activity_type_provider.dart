@@ -25,24 +25,11 @@ class ActivityTypeNotifier extends _$ActivityTypeNotifier {
   @override
   ActivityTypeState build() {
     final activityTypes = ref.read(activityTypeHiveProvider.notifier).getAll();
-    _maybeResumeFromDisk(activityTypes);
+    maybeResumeFromDisk(activityTypes: activityTypes);
 
     return ActivityTypeState.inital(
       activityTypes,
     );
-  }
-
-  Future<void> _maybeResumeFromDisk(List<ActivityType> activityTypes) async {
-    final diskStorage = await ref.read(diskStorageProvider.future);
-
-    final diskActivityTypeId = diskStorage.getString(diskActivityTypeKey);
-    if (diskActivityTypeId == null) return;
-
-    final activityType = activityTypes.firstWhere(
-      (activityType) => activityType.id == diskActivityTypeId,
-    );
-
-    state = state.copyWith(active: activityType);
   }
 
   Future<void> _updateDiskValue(ActivityType? activityType) async {
@@ -52,6 +39,23 @@ class ActivityTypeNotifier extends _$ActivityTypeNotifier {
       diskActivityTypeKey,
       activityType != null ? activityType.id : '',
     );
+  }
+
+  Future<void> maybeResumeFromDisk({List<ActivityType>? activityTypes}) async {
+    final diskStorage = await ref.read(diskStorageProvider.future);
+
+    final diskActivityTypeId = diskStorage.getString(diskActivityTypeKey);
+    if (diskActivityTypeId == null || diskActivityTypeId == state.active?.id) {
+      return;
+    }
+
+    final diskActivityType = (activityTypes ?? state.types).firstWhere(
+      (activityType) => activityType.id == diskActivityTypeId,
+      orElse: () => ActivityType(id: '', name: ''),
+    );
+    if (diskActivityType.id.isEmpty) return;
+
+    state = state.copyWith(active: diskActivityType);
   }
 
   void getAll() {

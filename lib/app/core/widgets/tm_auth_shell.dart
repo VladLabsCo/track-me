@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:track_me/app/core/core.dart';
+import 'package:track_me/app/core/widgets/tm_lifecycle_observer.dart';
 
 class TmAuthShell extends ConsumerStatefulWidget {
   const TmAuthShell({required this.child, super.key});
@@ -16,8 +17,9 @@ class TmAuthShell extends ConsumerStatefulWidget {
 class _TmAuthShellState extends ConsumerState<TmAuthShell> {
   @override
   void initState() {
-    ref.read(userNotifierProvider.notifier).init();
     super.initState();
+
+    ref.read(userNotifierProvider.notifier).init();
   }
 
   @override
@@ -34,7 +36,7 @@ class _TmAuthShellState extends ConsumerState<TmAuthShell> {
           });
         });
 
-        return widget.child;
+        return TmLifecycleObserver(children: widget.child);
       },
       unlogged: () {
         WidgetsBinding.instance.addPostFrameCallback((_) {

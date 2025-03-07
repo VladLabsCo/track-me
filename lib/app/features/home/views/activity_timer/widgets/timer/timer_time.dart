@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:track_me/app/features/home/views/activity_timer/providers/timer_provider.dart';
+import 'package:track_me/app/core/core.dart';
 
 class TimerTime extends ConsumerWidget {
   const TimerTime({super.key});
@@ -30,6 +30,8 @@ class _TimerTimeConsumerState extends State<_TimerTimeConsumer> {
 
   @override
   void initState() {
+    super.initState();
+
     // Resume normal behaviour when navigating back to screen
     if (widget.timerState.clockState != TimerClockState.initial) {
       _getSetTime(
@@ -44,12 +46,12 @@ class _TimerTimeConsumerState extends State<_TimerTimeConsumer> {
         );
       }
     }
-
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant _TimerTimeConsumer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     switch (widget.timerState.clockState) {
       case TimerClockState.initial:
         _resetTimer(
@@ -63,8 +65,6 @@ class _TimerTimeConsumerState extends State<_TimerTimeConsumer> {
       case TimerClockState.paused:
         _stopTimer();
     }
-
-    super.didUpdateWidget(oldWidget);
   }
 
   @override

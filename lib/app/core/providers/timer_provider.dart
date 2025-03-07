@@ -35,19 +35,8 @@ class TimerState with _$TimerState {
 class TimerNotifier extends _$TimerNotifier {
   @override
   TimerState build() {
-    _maybeResumeFromDisk();
+    maybeResumeFromDisk();
     return TimerState.initial();
-  }
-
-  Future<void> _maybeResumeFromDisk() async {
-    final diskStorage = await ref.read(diskStorageProvider.future);
-
-    final diskJsonString = diskStorage.getString(diskTimerKey);
-    if (diskJsonString == null || diskJsonString.isEmpty) return;
-
-    state = TimerState.fromJson(
-      jsonDecode(diskJsonString) as Map<String, dynamic>,
-    );
   }
 
   Future<void> _updateDiskValue(TimerState? state) async {
@@ -57,6 +46,24 @@ class TimerNotifier extends _$TimerNotifier {
       diskTimerKey,
       state != null ? jsonEncode(state.toJson()) : '',
     );
+  }
+
+  Future<void> maybeResumeFromDisk() async {
+    final diskStorage = await ref.read(diskStorageProvider.future);
+
+    final diskJsonString = diskStorage.getString(diskTimerKey);
+    if (diskJsonString == null || diskJsonString.isEmpty) return;
+
+    final diskState = TimerState.fromJson(
+      jsonDecode(diskJsonString) as Map<String, dynamic>,
+    );
+    if (state.clockState == diskState.clockState &&
+        state.runDate == diskState.runDate &&
+        state.durationAtPause == diskState.durationAtPause) {
+      return;
+    }
+
+    state = diskState;
   }
 
   void start() {

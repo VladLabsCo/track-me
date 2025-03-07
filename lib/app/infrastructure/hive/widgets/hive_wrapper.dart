@@ -13,18 +13,18 @@ class HiveWrapper extends StatefulWidget {
 class _HiveWrapperState extends State<HiveWrapper> with WidgetsBindingObserver {
   @override
   void initState() {
-    WidgetsBinding.instance.addObserver(this);
-
     super.initState();
+
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
     if (state == AppLifecycleState.detached) {
       Hive.close();
     }
-
-    super.didChangeAppLifecycleState(state);
   }
 
   @override

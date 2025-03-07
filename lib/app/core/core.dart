@@ -9,6 +9,7 @@ export 'providers/activity_provider.dart';
 export 'providers/activity_stats_provider.dart';
 export 'providers/activity_type_provider.dart';
 export 'providers/disk_storage_provider.dart';
+export 'providers/timer_provider.dart';
 export 'providers/user_provider.dart';
 
 // Widgets
