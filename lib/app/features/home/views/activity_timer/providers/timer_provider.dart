@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:track_me/app/core/core.dart';
 
 part 'timer_provider.freezed.dart';
 part 'timer_provider.g.dart';
+
+const diskTimerKey = 'timer';
 
 enum TimerClockState { initial, running, paused }
 
@@ -21,25 +26,54 @@ class TimerState with _$TimerState {
       runDate: null,
     );
   }
+
+  factory TimerState.fromJson(Map<String, dynamic> json) =>
+      _$TimerStateFromJson(json);
 }
 
 @Riverpod(keepAlive: true)
 class TimerNotifier extends _$TimerNotifier {
   @override
-  TimerState build() => TimerState.initial();
+  TimerState build() {
+    _maybeResumeFromDisk();
+    return TimerState.initial();
+  }
+
+  Future<void> _maybeResumeFromDisk() async {
+    final diskStorage = await ref.read(diskStorageProvider.future);
+
+    final diskJsonString = diskStorage.getString(diskTimerKey);
+    if (diskJsonString == null || diskJsonString.isEmpty) return;
+
+    state = TimerState.fromJson(
+      jsonDecode(diskJsonString) as Map<String, dynamic>,
+    );
+  }
+
+  Future<void> _updateDiskValue(TimerState? state) async {
+    final diskStorage = await ref.read(diskStorageProvider.future);
+
+    await diskStorage.setString(
+      diskTimerKey,
+      state != null ? jsonEncode(state.toJson()) : '',
+    );
+  }
 
   void start() {
-    state = state.copyWith(
+    final newState = state.copyWith(
       clockState: TimerClockState.running,
       runDate: DateTime.now(),
     );
+
+    state = newState;
+    _updateDiskValue(newState);
   }
 
   void pause() {
     final duration =
         DateTime.now().difference(state.runDate!) + state.durationAtPause;
 
-    state = state.copyWith(
+    final newState = state.copyWith(
       clockState: TimerClockState.paused,
       durationAtPause: Duration(
         days: duration.inDays,
@@ -49,14 +83,23 @@ class TimerNotifier extends _$TimerNotifier {
       ),
       runDate: null,
     );
+
+    state = newState;
+    _updateDiskValue(newState);
   }
 
   void resume() {
-    state = state.copyWith(
+    final newState = state.copyWith(
       clockState: TimerClockState.running,
       runDate: DateTime.now(),
     );
+
+    state = newState;
+    _updateDiskValue(newState);
   }
 
-  void stop() => state = TimerState.initial();
+  void stop() {
+    state = TimerState.initial();
+    _updateDiskValue(null);
+  }
 }

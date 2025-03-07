@@ -104,6 +104,7 @@ class TimerControls extends ConsumerWidget {
         accept: 'Yes, cancel it!',
         onAccepted: () async {
           ref.read(timerNotifierProvider.notifier).stop();
+          ref.read(activityTypeNotifierProvider.notifier).setActive(null);
           await cancelNotification();
         },
       );
