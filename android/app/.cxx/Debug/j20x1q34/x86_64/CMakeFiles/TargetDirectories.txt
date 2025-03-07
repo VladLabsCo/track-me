@@ -1,0 +1,2 @@
+/Users/vladi/Personal/projects/track-me/android/app/.cxx/Debug/j20x1q34/x86_64/CMakeFiles/edit_cache.dir
+/Users/vladi/Personal/projects/track-me/android/app/.cxx/Debug/j20x1q34/x86_64/CMakeFiles/rebuild_cache.dir
