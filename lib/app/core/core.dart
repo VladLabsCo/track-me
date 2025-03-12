@@ -16,6 +16,7 @@ export 'providers/user_provider.dart';
 export 'widgets/tm_auth_shell.dart';
 export 'widgets/tm_button.dart';
 export 'widgets/tm_card.dart';
+export 'widgets/tm_fab.dart';
 export 'widgets/tm_icon_button.dart';
 export 'widgets/tm_input.dart';
 export 'widgets/tm_logo.dart';

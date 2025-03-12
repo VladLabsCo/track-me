@@ -10,6 +10,7 @@ class TmScaffold extends StatelessWidget {
     this.title = '',
     this.subtitle = '',
     this.bottomNavigationBar,
+    this.floatingActionButton,
     super.key,
   });
 
@@ -36,6 +37,7 @@ class TmScaffold extends StatelessWidget {
   final String title;
   final String subtitle;
   final Widget? bottomNavigationBar;
+  final Widget? floatingActionButton;
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +88,8 @@ class TmScaffold extends StatelessWidget {
               )
             : content,
       ),
+      floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: bottomNavigationBar,
     );
   }
