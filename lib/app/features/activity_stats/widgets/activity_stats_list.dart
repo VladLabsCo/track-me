@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:track_me/app/core/core.dart';
-import 'package:track_me/app/features/home/views/activity_stats/widgets/activity_stats_tile.dart';
+import 'package:track_me/app/features/activity_stats/widgets/activity_stats_tile.dart';
 
 class ActivityStatsList extends ConsumerWidget {
   const ActivityStatsList({super.key});

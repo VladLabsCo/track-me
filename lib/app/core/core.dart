@@ -20,4 +20,5 @@ export 'widgets/tm_fab.dart';
 export 'widgets/tm_icon_button.dart';
 export 'widgets/tm_input.dart';
 export 'widgets/tm_logo.dart';
+export 'widgets/tm_padding.dart';
 export 'widgets/tm_scaffold.dart';

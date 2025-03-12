@@ -50,12 +50,7 @@ class TmScaffold extends StatelessWidget {
         .bodySmall!
         .copyWith(color: Colors.white.withAlpha(180));
 
-    final content = Padding(
-      padding: const EdgeInsets.only(
-        left: 16,
-        right: 16,
-        bottom: 16,
-      ),
+    final heading = TmPadding(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -70,9 +65,19 @@ class TmScaffold extends StatelessWidget {
             const SizedBox(height: 7),
           ],
           const SizedBox(height: 20),
-          Expanded(child: body),
         ],
       ),
+    );
+
+    final content = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        heading,
+        if (bottomNavigationBar == null)
+          Expanded(child: TmPadding(child: body))
+        else
+          Expanded(child: body),
+      ],
     );
 
     return Scaffold(

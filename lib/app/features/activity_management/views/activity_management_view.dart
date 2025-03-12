@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/features/activity_management/widgets/activity_types_list.dart';
 
-class ActivityManagementScreen extends StatelessWidget {
-  const ActivityManagementScreen({super.key});
+class ActivityManagementView extends StatelessWidget {
+  const ActivityManagementView({super.key});
 
   @override
   Widget build(BuildContext context) {

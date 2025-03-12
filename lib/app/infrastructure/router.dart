@@ -7,22 +7,22 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/login',
-      builder: (context, state) => const LoginScreen(),
+      builder: (context, state) => const LoginView(),
     ),
     ShellRoute(
       builder: (context, state, child) => TmAuthShell(child: child),
       routes: [
         GoRoute(
           path: '/',
-          builder: (context, state) => const HomeScreen(),
+          builder: (context, state) => const DashboardView(),
           routes: [
             GoRoute(
               path: 'new-type',
-              builder: (context, state) => const NewActivityFormScreen(),
+              builder: (context, state) => const NewActivityFormView(),
             ),
             GoRoute(
               path: 'type-management',
-              builder: (context, state) => const ActivityManagementScreen(),
+              builder: (context, state) => const ActivityManagementView(),
             ),
           ],
         ),
