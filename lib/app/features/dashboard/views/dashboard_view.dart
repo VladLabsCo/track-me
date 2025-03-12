@@ -14,6 +14,7 @@ class DashboardView extends StatelessWidget {
       length: 2,
       child: TmScaffold(
         body: TabBarView(
+          physics: NeverScrollableScrollPhysics(),
           children: [
             ActivityTimerView(),
             ActivityStatsView(),
