@@ -3,22 +3,23 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/infrastructure/infrastucture.dart';
 
-part 'activity_form_provider.freezed.dart';
-part 'activity_form_provider.g.dart';
+part 'new_activity_form_provider.freezed.dart';
+part 'new_activity_form_provider.g.dart';
 
 @freezed
-class ActivityFormState with _$ActivityFormState {
-  const factory ActivityFormState({
+class NewActivityFormState with _$NewActivityFormState {
+  const factory NewActivityFormState({
     required String name,
-  }) = _ActivityFormState;
+  }) = _NewActivityFormState;
 
-  factory ActivityFormState.initial() => const ActivityFormState(name: '');
+  factory NewActivityFormState.initial() =>
+      const NewActivityFormState(name: '');
 }
 
 @riverpod
 class ActivityForm extends _$ActivityForm {
   @override
-  ActivityFormState build() => ActivityFormState.initial();
+  NewActivityFormState build() => NewActivityFormState.initial();
 
   void setName(String name) => state = state.copyWith(name: name);
 

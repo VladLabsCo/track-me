@@ -18,7 +18,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: 'new-type',
-              builder: (context, state) => const ActivityFormScreen(),
+              builder: (context, state) => const NewActivityFormScreen(),
             ),
             GoRoute(
               path: 'type-management',
