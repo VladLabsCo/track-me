@@ -25,7 +25,7 @@ class NewActivityFormView extends ConsumerWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  TmInput(
+                  TmTextField(
                     label: 'Name',
                     icon: const Icon(
                       CupertinoIcons.bolt_circle,

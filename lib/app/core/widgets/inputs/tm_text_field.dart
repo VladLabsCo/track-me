@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TmInput extends StatelessWidget {
-  const TmInput({
+class TmTextField extends StatelessWidget {
+  const TmTextField({
     required this.label,
     required this.icon,
     required this.onChanged,
