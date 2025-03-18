@@ -66,6 +66,13 @@ class ActivityTypeNotifier extends _$ActivityTypeNotifier {
 
   void setActive(ActivityType? activityType) {
     state = state.copyWith(active: activityType);
-    _updateDiskValue(activityType);
+  }
+
+  void storeCurrentType() {
+    _updateDiskValue(state.active);
+  }
+
+  void clearStoredType() {
+    _updateDiskValue(null);
   }
 }

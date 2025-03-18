@@ -74,6 +74,7 @@ class TimerNotifier extends _$TimerNotifier {
 
     state = newState;
     _updateDiskValue(newState);
+    ref.read(activityTypeNotifierProvider.notifier).storeCurrentType();
   }
 
   void pause() {
@@ -108,5 +109,6 @@ class TimerNotifier extends _$TimerNotifier {
   void stop() {
     state = TimerState.initial();
     _updateDiskValue(null);
+    ref.read(activityTypeNotifierProvider.notifier).clearStoredType();
   }
 }
