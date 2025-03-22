@@ -6,7 +6,12 @@ import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/infrastructure/infrastucture.dart';
 
 class ActivityPicker extends ConsumerWidget {
-  const ActivityPicker({super.key});
+  const ActivityPicker({
+    this.forForm = false,
+    super.key,
+  });
+
+  final bool forForm;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,13 +31,14 @@ class ActivityPicker extends ConsumerWidget {
       final result = await showCupertinoModalPopup<(bool, ActivityType?)?>(
         context: context,
         builder: (BuildContext context) => _ActivityPickerPopup(
+          forForm: forForm,
           activityTypes: activityTypes,
           initialIndex: activeIndex,
         ),
       );
 
       if (result != null) {
-        if (result.$1) {
+        if (result.$1 && !forForm) {
           if (context.mounted) context.go('/new-type');
         } else {
           ref.read(activityTypeNotifierProvider.notifier).setActive(result.$2);
@@ -40,34 +46,48 @@ class ActivityPicker extends ConsumerWidget {
       }
     }
 
-    return Center(
-      child: OutlinedButton(
-        style: ElevatedButton.styleFrom(
-          side: const BorderSide(width: 0.5, color: Colors.white54),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(100),
-          ),
-          elevation: 0,
-          backgroundColor: Colors.white12,
-          disabledBackgroundColor: Colors.white10,
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+    final button = OutlinedButton(
+      style: ElevatedButton.styleFrom(
+        side: const BorderSide(width: 0.5, color: Colors.white54),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100),
         ),
-        onPressed: timerState == TimerClockState.initial ? showDialog : null,
-        child: Text(
-          activeIndex != null
-              ? activityTypes[activeIndex].name
-              : 'Select activity',
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
+        elevation: 0,
+        backgroundColor: Colors.white12,
+        disabledBackgroundColor: Colors.white10,
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+      ),
+      onPressed: timerState == TimerClockState.initial ? showDialog : null,
+      child: Text(
+        activeIndex != null
+            ? activityTypes[activeIndex].name
+            : 'Select activity',
+        style: forForm
+            ? Theme.of(context).textTheme.labelSmall
+            : Theme.of(context).textTheme.labelMedium,
       ),
     );
+
+    if (forForm) {
+      return SizedBox(
+        width: double.infinity,
+        child: button,
+      );
+    }
+
+    return Center(child: button);
   }
 }
 
 class _ActivityPickerPopup extends StatefulWidget {
-  const _ActivityPickerPopup({required this.activityTypes, this.initialIndex});
+  const _ActivityPickerPopup({
+    required this.forForm,
+    required this.activityTypes,
+    this.initialIndex,
+  });
 
+  final bool forForm;
   final List<ActivityType> activityTypes;
   final int? initialIndex;
 
@@ -110,40 +130,47 @@ class _ActivityPickerPopupState extends State<_ActivityPickerPopup> {
             if (activitiesLength == 0) ...[
               const SizedBox(height: 12),
               Text(
-                "No activities yet. Tap 'Done' to add one.",
+                widget.forForm
+                    ? 'No activities yet'
+                    : "No activities yet. Tap 'Done' to add one.",
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: Colors.grey,
                     ),
                 textAlign: TextAlign.center,
               ),
             ],
-            Expanded(
-              child: CupertinoPicker(
-                magnification: 1.22,
-                squeeze: 1.2,
-                useMagnifier: true,
-                itemExtent: 32,
-                scrollController: _scrollController,
-                onSelectedItemChanged: (itemIndex) => setState(() {
-                  _selectedItemIndex = itemIndex;
-                }),
-                children: List<Widget>.generate(
-                  activitiesLength + 1,
-                  (int index) {
-                    final text = (index + 1) > activitiesLength
-                        ? 'New...'
-                        : widget.activityTypes[index].name;
+            if (widget.forForm && activitiesLength == 0)
+              const Expanded(
+                child: SizedBox(width: double.infinity),
+              )
+            else
+              Expanded(
+                child: CupertinoPicker(
+                  magnification: 1.22,
+                  squeeze: 1.2,
+                  useMagnifier: true,
+                  itemExtent: 32,
+                  scrollController: _scrollController,
+                  onSelectedItemChanged: (itemIndex) => setState(() {
+                    _selectedItemIndex = itemIndex;
+                  }),
+                  children: List<Widget>.generate(
+                    widget.forForm ? activitiesLength : activitiesLength + 1,
+                    (int index) {
+                      final text = (index + 1) > activitiesLength
+                          ? 'New...'
+                          : widget.activityTypes[index].name;
 
-                    return Center(
-                      child: Text(
-                        text,
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    );
-                  },
+                      return Center(
+                        child: Text(
+                          text,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
             CupertinoButton(
               onPressed: handleDone,
               child: const Text(

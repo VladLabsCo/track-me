@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:track_me/app/infrastructure/infrastucture.dart';
@@ -56,5 +57,8 @@ final theme = ThemeData(
   scaffoldBackgroundColor: const Color(0xFF0D0E0F),
   dialogTheme: const DialogThemeData(
     backgroundColor: Color(0xFF202122),
+  ),
+  cupertinoOverrideTheme: const CupertinoThemeData(
+    brightness: Brightness.dark,
   ),
 );

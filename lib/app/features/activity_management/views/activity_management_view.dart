@@ -9,16 +9,12 @@ class ActivityManagementView extends StatelessWidget {
   Widget build(BuildContext context) {
     return TmScaffold.nested(
       title: 'Manage Activities',
-      body: SizedBox.expand(
+      subtitle: 'Your activities (in development...)',
+      body: const SizedBox.expand(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Your activities (in development...)',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const SizedBox(height: 16),
-            const ActivityTypesList(),
+            ActivityTypesList(),
           ],
         ),
       ),

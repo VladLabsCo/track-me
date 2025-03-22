@@ -2,7 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TmFab extends StatelessWidget {
-  const TmFab({super.key});
+  const TmFab({
+    this.toolip,
+    this.onPressed,
+    super.key,
+  });
+
+  final String? toolip;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -10,12 +17,12 @@ class TmFab extends StatelessWidget {
 
     return FloatingActionButton(
       elevation: 0,
-      tooltip: 'Add activity manually',
+      tooltip: toolip,
       shape: CircleBorder(
         side: BorderSide(width: 2, color: primaryColor),
       ),
       backgroundColor: Theme.of(context).cardColor,
-      onPressed: () {},
+      onPressed: onPressed,
       child: Icon(
         CupertinoIcons.add,
         size: 28,

@@ -13,6 +13,9 @@ export 'providers/timer_provider.dart';
 export 'providers/user_provider.dart';
 
 // Widgets
+export 'widgets/inputs/activity_picker.dart';
+export 'widgets/inputs/date_input.dart';
+export 'widgets/inputs/duration_input.dart';
 export 'widgets/inputs/tm_text_field.dart';
 export 'widgets/tm_auth_shell.dart';
 export 'widgets/tm_button.dart';

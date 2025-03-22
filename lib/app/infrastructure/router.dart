@@ -24,6 +24,10 @@ final router = GoRouter(
               path: 'type-management',
               builder: (context, state) => const ActivityManagementView(),
             ),
+            GoRoute(
+              path: 'new-manual-log',
+              builder: (context, state) => const ManualActivityView(),
+            ),
           ],
         ),
       ],

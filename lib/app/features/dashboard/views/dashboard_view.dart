@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:track_me/app/core/core.dart';
-// import 'package:track_me/app/features/dashboard/widgets/dashboard_fab.dart';
+import 'package:track_me/app/features/dashboard/widgets/dashboard_fab.dart';
 import 'package:track_me/app/features/dashboard/widgets/dashboard_navbar.dart';
 import 'package:track_me/app/features/features.dart';
 
@@ -20,7 +20,7 @@ class DashboardView extends StatelessWidget {
             ActivityStatsView(),
           ],
         ),
-        // floatingActionButton: DashboardFab(),
+        floatingActionButton: DashboardFab(),
         bottomNavigationBar: DashboardNavbar(
           items: [
             CupertinoIcons.timer,

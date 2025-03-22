@@ -21,7 +21,7 @@ class ActivityHive extends _$ActivityHive
       id: tmUuid(),
       activityTypeId: activityCreateDto.activityTypeId,
       duration: activityCreateDto.duration,
-      date: DateTime.now(),
+      date: activityCreateDto.date ?? DateTime.now(),
     );
 
     await getBox().add(newActivity);

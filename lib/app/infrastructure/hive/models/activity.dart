@@ -30,8 +30,10 @@ class ActivityCreateDto {
   const ActivityCreateDto({
     required this.activityTypeId,
     required this.duration,
+    this.date,
   });
 
   final String activityTypeId;
   final Duration duration;
+  final DateTime? date;
 }

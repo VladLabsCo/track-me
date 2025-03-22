@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:track_me/app/core/core.dart';
-import 'package:track_me/app/features/activity_timer/widgets/activity_picker.dart';
 import 'package:track_me/app/features/activity_timer/widgets/activity_timeline/activity_timeline.dart';
 import 'package:track_me/app/features/activity_timer/widgets/timer/timer.dart';
 

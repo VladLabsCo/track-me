@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:track_me/app/core/widgets/tm_fab.dart';
 
 class DashboardFab extends StatelessWidget {
@@ -26,8 +27,10 @@ class DashboardFab extends StatelessWidget {
           );
         },
         child: tabController.index == 1
-            ? const TmFab(
-                key: ValueKey('fab'),
+            ? TmFab(
+                key: const ValueKey('fab'),
+                toolip: 'Add activity manually',
+                onPressed: () => context.go('/new-manual-log'),
               )
             : null,
       ),
