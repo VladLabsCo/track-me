@@ -25,38 +25,33 @@ class ActivityStatsTile extends StatelessWidget {
           color: Colors.white70,
         );
 
-    return Column(
-      children: [
-        TmCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return TmCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(type.name, style: nameStyle),
+          const SizedBox(height: 16),
+          Row(
             children: [
-              Text(type.name, style: nameStyle),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  const Icon(
-                    CupertinoIcons.time,
-                    color: Colors.white70,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(tmTimeFormat(stats.totalDuration), style: timeStyle),
-                  if (stats.lastUpdate != null) ...[
-                    const SizedBox(width: 16),
-                    const Icon(
-                      CupertinoIcons.calendar,
-                      color: Colors.white70,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(tmDateFormat(stats.lastUpdate!), style: timeStyle),
-                  ],
-                ],
+              const Icon(
+                CupertinoIcons.time,
+                color: Colors.white70,
               ),
+              const SizedBox(width: 8),
+              Text(tmTimeFormat(stats.totalDuration), style: timeStyle),
+              if (stats.lastUpdate != null) ...[
+                const SizedBox(width: 16),
+                const Icon(
+                  CupertinoIcons.calendar,
+                  color: Colors.white70,
+                ),
+                const SizedBox(width: 8),
+                Text(tmDateFormat(stats.lastUpdate!), style: timeStyle),
+              ],
             ],
           ),
-        ),
-        const SizedBox(height: 10),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -22,30 +22,29 @@ class ActivityTypesList extends ConsumerWidget {
     }
 
     return Expanded(
-      child: SizedBox.expand(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              for (final activityType in activityTypeState.types) ...[
-                TmCard(
-                  actions: FilledButton(
-                    style: FilledButton.styleFrom(
-                      padding: const EdgeInsets.all(14),
-                      minimumSize: Size.zero,
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      backgroundColor: Colors.transparent,
-                    ),
-                    onPressed: () => handleArchiveACtivity(activityType.id),
-                    child: const Icon(
-                      CupertinoIcons.archivebox,
-                      size: 22,
-                    ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            for (final activityType in activityTypeState.types) ...[
+              TmCard(
+                actions: FilledButton(
+                  style: FilledButton.styleFrom(
+                    padding: const EdgeInsets.all(14),
+                    minimumSize: Size.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    backgroundColor: Colors.transparent,
                   ),
-                  child: Text(activityType.name),
+                  onPressed: () => handleArchiveACtivity(activityType.id),
+                  child: const Icon(
+                    CupertinoIcons.archivebox,
+                    size: 22,
+                  ),
                 ),
-              ],
+                child: Text(activityType.name),
+              ),
+              const SizedBox(height: 15),
             ],
-          ),
+          ],
         ),
       ),
     );

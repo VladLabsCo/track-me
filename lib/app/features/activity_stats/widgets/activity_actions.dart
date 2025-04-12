@@ -19,7 +19,7 @@ class ActivityActions extends StatelessWidget {
             size: 15,
           ),
           onPressed: () => context.go('/type-management'),
-          'Manage Activities',
+          'My Activities',
         ),
       ],
     );

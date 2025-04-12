@@ -10,6 +10,7 @@ class ActivityType extends HiveObject implements HiveBoxDocument {
     required this.name,
     this.icon,
     this.category,
+    this.isArchived = false,
   });
 
   @override
@@ -24,6 +25,9 @@ class ActivityType extends HiveObject implements HiveBoxDocument {
 
   @HiveField(3)
   final String? category;
+
+  @HiveField(4)
+  final bool? isArchived;
 }
 
 class ActivityTypeCreateDto {

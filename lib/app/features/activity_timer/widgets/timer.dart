@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:track_me/app/features/activity_timer/widgets/timer/timer_controls.dart';
-import 'package:track_me/app/features/activity_timer/widgets/timer/timer_time.dart';
+import 'package:track_me/app/features/activity_timer/widgets/timer_controls.dart';
+import 'package:track_me/app/features/activity_timer/widgets/timer_time.dart';
 
 class Timer extends StatelessWidget {
   const Timer({super.key});

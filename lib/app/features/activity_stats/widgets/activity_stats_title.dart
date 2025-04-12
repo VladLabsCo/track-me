@@ -18,7 +18,7 @@ class ActivityStatsTitle extends ConsumerWidget {
     }
 
     return Text(
-      'You are doing great, $userName!',
+      'Keep it up $userName!',
       style: const TextStyle(
         height: 1,
         fontSize: 26,

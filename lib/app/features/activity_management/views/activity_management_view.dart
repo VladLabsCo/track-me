@@ -8,7 +8,7 @@ class ActivityManagementView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TmScaffold.nested(
-      title: 'Manage Activities',
+      title: 'My Activities',
       subtitle: 'Archive the activities you no longer need.',
       body: const SizedBox.expand(
         child: Column(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/features/activity_timer/helpers/group_activities.dart';
-import 'package:track_me/app/features/activity_timer/widgets/activity_timeline/activity_timeline_tile.dart';
+import 'package:track_me/app/features/activity_timer/widgets/activity_timeline_tile.dart';
 
 class ActivityTimeline extends ConsumerWidget {
   const ActivityTimeline({super.key});
@@ -37,10 +37,9 @@ class ActivityTimeline extends ConsumerWidget {
             else
               for (final group in groupedActivities)
                 if (group.value.isNotEmpty) ...[
+                  const SizedBox(height: 10),
                   Text(group.key),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   for (final activity in group.value) ...[
                     ActivityTimelineTile(
                       activity: activity,
@@ -49,7 +48,7 @@ class ActivityTimeline extends ConsumerWidget {
                             activityType.id == activity.activityTypeId,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 15),
                   ],
                 ],
           ],
