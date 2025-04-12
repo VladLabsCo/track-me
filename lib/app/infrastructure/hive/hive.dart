@@ -1,4 +1,4 @@
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:track_me/app/infrastructure/hive/adapters/datetime_adapter.dart';
 import 'package:track_me/app/infrastructure/hive/adapters/duration_adapter.dart';

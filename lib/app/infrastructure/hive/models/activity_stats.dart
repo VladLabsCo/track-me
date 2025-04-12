@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/infrastructure/hive/hive.dart';
 
