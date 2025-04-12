@@ -1,4 +1,4 @@
-import 'package:track_me/app/infrastructure/infrastucture.dart';
+import 'package:track_me/app/infrastructure/infrastructure.dart';
 
 bool _isSameDay(DateTime date1, DateTime date2) {
   return date1.year == date2.year &&

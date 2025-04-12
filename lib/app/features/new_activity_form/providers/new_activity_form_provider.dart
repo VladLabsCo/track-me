@@ -1,20 +1,9 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:track_me/app/core/core.dart';
-import 'package:track_me/app/infrastructure/infrastucture.dart';
+import 'package:track_me/app/features/new_activity_form/providers/state/new_activity_form_state.dart';
+import 'package:track_me/app/infrastructure/infrastructure.dart';
 
-part 'new_activity_form_provider.freezed.dart';
 part 'new_activity_form_provider.g.dart';
-
-@freezed
-class NewActivityFormState with _$NewActivityFormState {
-  const factory NewActivityFormState({
-    required String name,
-  }) = _NewActivityFormState;
-
-  factory NewActivityFormState.initial() =>
-      const NewActivityFormState(name: '');
-}
 
 @riverpod
 class ActivityForm extends _$ActivityForm {

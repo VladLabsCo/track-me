@@ -1,24 +1,9 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:track_me/app/core/core.dart';
-import 'package:track_me/app/infrastructure/hive/models/activity.dart';
-import 'package:track_me/app/infrastructure/hive/providers/activity_hive_provider.dart';
+import 'package:track_me/app/features/manual_activity/providers/state/manual_activity_form_state.dart';
+import 'package:track_me/app/infrastructure/infrastructure.dart';
 
-part 'manual_activity_form_provider.freezed.dart';
 part 'manual_activity_form_provider.g.dart';
-
-@freezed
-abstract class ManualActivityFormState with _$ManualActivityFormState {
-  const factory ManualActivityFormState({
-    required DateTime date,
-    required Duration duration,
-  }) = _ManualActivityFormState;
-
-  factory ManualActivityFormState.initial() => ManualActivityFormState(
-        date: DateTime.now(),
-        duration: Duration.zero,
-      );
-}
 
 @riverpod
 class ManualActivityFormNotifier extends _$ManualActivityFormNotifier {

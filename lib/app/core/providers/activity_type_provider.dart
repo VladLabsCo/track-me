@@ -1,24 +1,10 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:track_me/app/core/core.dart';
-import 'package:track_me/app/infrastructure/infrastucture.dart';
+import 'package:track_me/app/core/providers/state/activity_type_state.dart';
+import 'package:track_me/app/infrastructure/infrastructure.dart';
 
-part 'activity_type_provider.freezed.dart';
 part 'activity_type_provider.g.dart';
 
 const diskActivityTypeKey = 'activityType';
-
-@freezed
-class ActivityTypeState with _$ActivityTypeState {
-  const factory ActivityTypeState({
-    required List<ActivityType> types,
-    ActivityType? active,
-  }) = _ActivityTypeState;
-
-  factory ActivityTypeState.inital(List<ActivityType> types) {
-    return ActivityTypeState(types: types);
-  }
-}
 
 @Riverpod(keepAlive: true)
 class ActivityTypeNotifier extends _$ActivityTypeNotifier {

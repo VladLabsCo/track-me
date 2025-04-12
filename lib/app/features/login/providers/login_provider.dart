@@ -1,18 +1,8 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:track_me/app/core/core.dart';
+import 'package:track_me/app/features/login/providers/state/login_state.dart';
 
-part 'login_provider.freezed.dart';
 part 'login_provider.g.dart';
-
-@freezed
-class LoginState with _$LoginState {
-  const factory LoginState({
-    required String name,
-  }) = _LoginState;
-
-  factory LoginState.initial() => const LoginState(name: '');
-}
 
 @riverpod
 class LoginNotifier extends _$LoginNotifier {

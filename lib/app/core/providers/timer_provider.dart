@@ -1,35 +1,12 @@
 import 'dart:convert';
 
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:track_me/app/core/core.dart';
+import 'package:track_me/app/infrastructure/infrastructure.dart';
 
-part 'timer_provider.freezed.dart';
 part 'timer_provider.g.dart';
 
 const diskTimerKey = 'timer';
-
-enum TimerClockState { initial, running, paused }
-
-@freezed
-class TimerState with _$TimerState {
-  const factory TimerState({
-    required TimerClockState clockState,
-    required Duration durationAtPause,
-    required DateTime? runDate,
-  }) = _TimerState;
-
-  factory TimerState.initial() {
-    return const TimerState(
-      clockState: TimerClockState.initial,
-      durationAtPause: Duration.zero,
-      runDate: null,
-    );
-  }
-
-  factory TimerState.fromJson(Map<String, dynamic> json) =>
-      _$TimerStateFromJson(json);
-}
 
 @Riverpod(keepAlive: true)
 class TimerNotifier extends _$TimerNotifier {

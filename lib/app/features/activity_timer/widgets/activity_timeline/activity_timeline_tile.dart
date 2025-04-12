@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:track_me/app/core/core.dart';
-import 'package:track_me/app/infrastructure/infrastucture.dart';
+import 'package:track_me/app/infrastructure/infrastructure.dart';
 
 class ActivityTimelineTile extends StatelessWidget {
   const ActivityTimelineTile({

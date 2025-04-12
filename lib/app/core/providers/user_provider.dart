@@ -1,24 +1,16 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:track_me/app/core/core.dart';
+import 'package:track_me/app/core/providers/state/user_state.dart';
+import 'package:track_me/app/infrastructure/infrastructure.dart';
 
-part 'user_provider.freezed.dart';
 part 'user_provider.g.dart';
 
 const diskNameKey = 'userName';
 
-@freezed
-class User with _$User {
-  const factory User.logged(String name) = LoggedUser;
-  const factory User.unlogged() = UnloggedUser;
-  const factory User.unkown() = UnkownUser;
-}
-
 @riverpod
 class UserNotifier extends _$UserNotifier {
   @override
-  User build() => const User.unkown();
+  UserState build() => const UserState.unkown();
 
   Future<SharedPreferences> _getDiskStorage() async {
     return ref.read(diskStorageProvider.future);
@@ -28,9 +20,9 @@ class UserNotifier extends _$UserNotifier {
     final name = (await _getDiskStorage()).getString(diskNameKey) ?? '';
 
     if (name.isNotEmpty) {
-      state = User.logged(name);
+      state = UserState.logged(name);
     } else {
-      state = const User.unlogged();
+      state = const UserState.unlogged();
     }
   }
 

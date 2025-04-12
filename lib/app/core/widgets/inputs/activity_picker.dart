@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:track_me/app/core/core.dart';
-import 'package:track_me/app/infrastructure/infrastucture.dart';
+import 'package:track_me/app/infrastructure/infrastructure.dart';
 
 class ActivityPicker extends ConsumerWidget {
   const ActivityPicker({

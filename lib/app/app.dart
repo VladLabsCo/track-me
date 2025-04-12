@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:track_me/app/infrastructure/infrastucture.dart';
+import 'package:track_me/app/infrastructure/infrastructure.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

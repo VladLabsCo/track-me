@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:track_me/app/core/core.dart';
-import 'package:track_me/app/infrastructure/infrastucture.dart';
+import 'package:track_me/app/infrastructure/infrastructure.dart';
 
 class ActivityStatsTile extends StatelessWidget {
   const ActivityStatsTile({
