@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 
 class HiveWrapper extends StatefulWidget {
   const HiveWrapper({required this.child, super.key});
@@ -13,18 +13,18 @@ class HiveWrapper extends StatefulWidget {
 class _HiveWrapperState extends State<HiveWrapper> with WidgetsBindingObserver {
   @override
   void initState() {
-    WidgetsBinding.instance.addObserver(this);
-
     super.initState();
+
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
     if (state == AppLifecycleState.detached) {
       Hive.close();
     }
-
-    super.didChangeAppLifecycleState(state);
   }
 
   @override

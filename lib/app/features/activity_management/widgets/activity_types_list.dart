@@ -10,14 +10,39 @@ class ActivityTypesList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final activityTypeState = ref.watch(activityTypeNotifierProvider);
 
+    Future<void> handleArchiveACtivity(String activityTypeId) async {
+      await tmDialogConfirm(
+        context: context,
+        title: 'Archive activity',
+        subtitle: 'Are you sure you want to archive this activity?',
+        deny: 'No',
+        accept: 'Yes',
+        onAccepted: () {},
+      );
+    }
+
     return Expanded(
       child: SizedBox.expand(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              for (final activitiType in activityTypeState.types) ...[
-                TmCard(child: Text(activitiType.name)),
-                const SizedBox(height: 10),
+              for (final activityType in activityTypeState.types) ...[
+                TmCard(
+                  actions: FilledButton(
+                    style: FilledButton.styleFrom(
+                      padding: const EdgeInsets.all(14),
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      backgroundColor: Colors.transparent,
+                    ),
+                    onPressed: () => handleArchiveACtivity(activityType.id),
+                    child: const Icon(
+                      CupertinoIcons.archivebox,
+                      size: 22,
+                    ),
+                  ),
+                  child: Text(activityType.name),
+                ),
               ],
             ],
           ),

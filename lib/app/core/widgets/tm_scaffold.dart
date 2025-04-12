@@ -10,6 +10,7 @@ class TmScaffold extends StatelessWidget {
     this.title = '',
     this.subtitle = '',
     this.bottomNavigationBar,
+    this.floatingActionButton,
     super.key,
   });
 
@@ -36,6 +37,7 @@ class TmScaffold extends StatelessWidget {
   final String title;
   final String subtitle;
   final Widget? bottomNavigationBar;
+  final Widget? floatingActionButton;
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +50,7 @@ class TmScaffold extends StatelessWidget {
         .bodySmall!
         .copyWith(color: Colors.white.withAlpha(180));
 
-    final content = Padding(
-      padding: const EdgeInsets.only(
-        left: 16,
-        right: 16,
-        bottom: 16,
-      ),
+    final heading = TmPadding(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -68,9 +65,19 @@ class TmScaffold extends StatelessWidget {
             const SizedBox(height: 7),
           ],
           const SizedBox(height: 20),
-          Expanded(child: body),
         ],
       ),
+    );
+
+    final content = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        heading,
+        if (bottomNavigationBar == null)
+          Expanded(child: TmPadding(child: body))
+        else
+          Expanded(child: body),
+      ],
     );
 
     return Scaffold(
@@ -86,6 +93,8 @@ class TmScaffold extends StatelessWidget {
               )
             : content,
       ),
+      floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: bottomNavigationBar,
     );
   }

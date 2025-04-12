@@ -18,7 +18,7 @@ class LoginForm extends ConsumerWidget {
     return Column(
       children: [
         const SizedBox(height: 20),
-        TmInput(
+        TmTextField(
           keyboardType: TextInputType.emailAddress,
           label: 'Name',
           icon: const Icon(

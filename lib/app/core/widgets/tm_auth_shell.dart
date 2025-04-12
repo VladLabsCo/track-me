@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:track_me/app/core/core.dart';
+import 'package:track_me/app/core/providers/state/user_state.dart';
+import 'package:track_me/app/core/widgets/tm_lifecycle_observer.dart';
 
 class TmAuthShell extends ConsumerStatefulWidget {
   const TmAuthShell({required this.child, super.key});
@@ -16,34 +18,33 @@ class TmAuthShell extends ConsumerStatefulWidget {
 class _TmAuthShellState extends ConsumerState<TmAuthShell> {
   @override
   void initState() {
-    ref.read(userNotifierProvider.notifier).init();
     super.initState();
+
+    ref.read(userNotifierProvider.notifier).init();
   }
 
   @override
   Widget build(BuildContext context) {
     final user = ref.watch(userNotifierProvider);
 
-    return user.when(
-      logged: (_) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
-            if (!isAllowed) {
-              AwesomeNotifications().requestPermissionToSendNotifications();
-            }
-          });
+    if (user is LoggedUser) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+          if (!isAllowed) {
+            AwesomeNotifications().requestPermissionToSendNotifications();
+          }
         });
+      });
 
-        return widget.child;
-      },
-      unlogged: () {
+      if (user is UnloggedUser) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           context.replace('/login');
         });
+      }
 
-        return const Scaffold();
-      },
-      unkown: () => const Scaffold(),
-    );
+      return TmLifecycleObserver(children: widget.child);
+    }
+
+    return const Scaffold();
   }
 }

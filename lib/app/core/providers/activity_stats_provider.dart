@@ -1,26 +1,8 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:track_me/app/infrastructure/infrastucture.dart';
+import 'package:track_me/app/core/providers/state/activity_stats_state.dart';
+import 'package:track_me/app/infrastructure/infrastructure.dart';
 
-part 'activity_stats_provider.freezed.dart';
 part 'activity_stats_provider.g.dart';
-
-@freezed
-class ActivityStatsState with _$ActivityStatsState {
-  const factory ActivityStatsState({
-    required List<ActivityStats> stats,
-  }) = _ActivityStatsState;
-
-  factory ActivityStatsState.inital(List<ActivityStats> stats) {
-    return ActivityStatsState(stats: stats);
-  }
-}
-
-extension ActivityStatsStateMethods on ActivityStatsState {
-  ActivityStatsState setStats(List<ActivityStats> stats) {
-    return copyWith(stats: stats);
-  }
-}
 
 @riverpod
 class ActivityStatsNotifier extends _$ActivityStatsNotifier {

@@ -17,11 +17,17 @@ Future<void> tmDialogConfirm({
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(false),
-          child: Text(deny, style: const TextStyle(color: Colors.grey)),
+          child: Text(
+            deny,
+            style: const TextStyle(color: Colors.grey),
+          ),
         ),
         TextButton(
           onPressed: () => Navigator.of(context).pop(true),
-          child: Text(accept, style: const TextStyle(color: Colors.blue)),
+          child: Text(
+            accept,
+            style: const TextStyle(color: Colors.blue),
+          ),
         ),
       ],
     ),

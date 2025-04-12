@@ -8,7 +8,7 @@ enum TmButtonSize {
 class TmButton extends StatelessWidget {
   const TmButton(
     this.label, {
-    required this.onPressed,
+    this.onPressed,
     this.outlined = false,
     this.size = TmButtonSize.normal,
     this.padding,
@@ -17,7 +17,7 @@ class TmButton extends StatelessWidget {
   });
 
   final String label;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final bool outlined;
   final TmButtonSize size;
   final EdgeInsetsGeometry? padding;
@@ -56,6 +56,7 @@ class TmButton extends StatelessWidget {
         side: side,
         elevation: 0,
         backgroundColor: backgroundColor,
+        disabledBackgroundColor: backgroundColor.withAlpha(180),
         foregroundColor: Colors.white,
         padding: sizePadding,
         minimumSize: Size.zero,

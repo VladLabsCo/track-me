@@ -1,5 +1,5 @@
-import 'package:hive/hive.dart';
-import 'package:track_me/app/infrastructure/infrastucture.dart';
+import 'package:hive_ce/hive.dart';
+import 'package:track_me/app/infrastructure/infrastructure.dart';
 
 part 'activity.g.dart';
 
@@ -30,8 +30,10 @@ class ActivityCreateDto {
   const ActivityCreateDto({
     required this.activityTypeId,
     required this.duration,
+    this.date,
   });
 
   final String activityTypeId;
   final Duration duration;
+  final DateTime? date;
 }

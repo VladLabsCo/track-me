@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/infrastructure/hive/hive.dart';
 
@@ -44,8 +44,6 @@ class ActivityStats extends HiveObject implements HiveBoxDocument {
   @HiveField(3)
   final DateTime? lastUpdate;
 }
-
-extension ActivityStatsMethods on ActivityStats {}
 
 class ActivityStatsCreateDto {
   const ActivityStatsCreateDto({

@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:track_me/app/infrastructure/infrastucture.dart';
+import 'package:track_me/app/infrastructure/infrastructure.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -54,5 +55,10 @@ final theme = ThemeData(
   primaryColor: const Color(0xFFF5004F),
   cardColor: const Color(0xFF202122),
   scaffoldBackgroundColor: const Color(0xFF0D0E0F),
-  dialogBackgroundColor: const Color(0xFF202122),
+  dialogTheme: const DialogThemeData(
+    backgroundColor: Color(0xFF202122),
+  ),
+  cupertinoOverrideTheme: const CupertinoThemeData(
+    brightness: Brightness.dark,
+  ),
 );

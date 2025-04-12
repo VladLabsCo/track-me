@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/infrastructure/hive/hive.dart';
@@ -21,7 +21,7 @@ class ActivityHive extends _$ActivityHive
       id: tmUuid(),
       activityTypeId: activityCreateDto.activityTypeId,
       duration: activityCreateDto.duration,
-      date: DateTime.now(),
+      date: activityCreateDto.date ?? DateTime.now(),
     );
 
     await getBox().add(newActivity);

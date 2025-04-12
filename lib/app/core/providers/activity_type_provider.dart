@@ -1,46 +1,64 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:track_me/app/infrastructure/infrastucture.dart';
+import 'package:track_me/app/core/providers/state/activity_type_state.dart';
+import 'package:track_me/app/infrastructure/infrastructure.dart';
 
-part 'activity_type_provider.freezed.dart';
 part 'activity_type_provider.g.dart';
 
-@freezed
-class ActivityTypeState with _$ActivityTypeState {
-  const factory ActivityTypeState({
-    required List<ActivityType> types,
-    ActivityType? active,
-  }) = _ActivityTypeState;
-
-  factory ActivityTypeState.inital(List<ActivityType> types) {
-    return ActivityTypeState(types: types);
-  }
-}
-
-extension ActivityTypeStateMethods on ActivityTypeState {
-  ActivityTypeState setActivityTypes(List<ActivityType> types) {
-    return copyWith(types: types);
-  }
-
-  ActivityTypeState setActive(ActivityType? active) {
-    return copyWith(active: active);
-  }
-}
+const diskActivityTypeKey = 'activityType';
 
 @Riverpod(keepAlive: true)
 class ActivityTypeNotifier extends _$ActivityTypeNotifier {
   @override
   ActivityTypeState build() {
+    final activityTypes = ref.read(activityTypeHiveProvider.notifier).getAll();
+    maybeResumeFromDisk(activityTypes: activityTypes);
+
     return ActivityTypeState.inital(
-      ref.read(activityTypeHiveProvider.notifier).getAll(),
+      activityTypes,
     );
+  }
+
+  Future<void> _updateDiskValue(ActivityType? activityType) async {
+    final diskStorage = await ref.read(diskStorageProvider.future);
+
+    await diskStorage.setString(
+      diskActivityTypeKey,
+      activityType != null ? activityType.id : '',
+    );
+  }
+
+  Future<void> maybeResumeFromDisk({List<ActivityType>? activityTypes}) async {
+    final diskStorage = await ref.read(diskStorageProvider.future);
+
+    final diskActivityTypeId = diskStorage.getString(diskActivityTypeKey);
+    if (diskActivityTypeId == null || diskActivityTypeId == state.active?.id) {
+      return;
+    }
+
+    final diskActivityType = (activityTypes ?? state.types).firstWhere(
+      (activityType) => activityType.id == diskActivityTypeId,
+      orElse: () => ActivityType(id: '', name: ''),
+    );
+    if (diskActivityType.id.isEmpty) return;
+
+    state = state.copyWith(active: diskActivityType);
   }
 
   void getAll() {
-    state = state.setActivityTypes(
-      ref.read(activityTypeHiveProvider.notifier).getAll(),
+    state = state.copyWith(
+      types: ref.read(activityTypeHiveProvider.notifier).getAll(),
     );
   }
 
-  void setActive(ActivityType? active) => state = state.setActive(active);
+  void setActive(ActivityType? activityType) {
+    state = state.copyWith(active: activityType);
+  }
+
+  void storeCurrentType() {
+    _updateDiskValue(state.active);
+  }
+
+  void clearStoredType() {
+    _updateDiskValue(null);
+  }
 }
