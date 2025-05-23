@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:track_me/app/core/core.dart';
+import 'package:track_me/app/infrastructure/infrastructure.dart';
 
 class ActivityTypesList extends ConsumerWidget {
   const ActivityTypesList({super.key});
@@ -10,14 +11,16 @@ class ActivityTypesList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final activityTypeState = ref.watch(activityTypeNotifierProvider);
 
-    Future<void> handleArchiveACtivity(String activityTypeId) async {
+    Future<void> handleArchiveActivity(ActivityType activityType) async {
       await tmDialogConfirm(
         context: context,
         title: 'Archive activity',
         subtitle: 'Are you sure you want to archive this activity?',
         deny: 'No',
         accept: 'Yes',
-        onAccepted: () {},
+        onAccepted: () => ref
+            .watch(activityTypeNotifierProvider.notifier)
+            .toggleIsArchived(activityType),
       );
     }
 
@@ -34,13 +37,15 @@ class ActivityTypesList extends ConsumerWidget {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     backgroundColor: Colors.transparent,
                   ),
-                  onPressed: () => handleArchiveACtivity(activityType.id),
+                  onPressed: () => handleArchiveActivity(activityType),
                   child: const Icon(
                     CupertinoIcons.archivebox,
                     size: 22,
                   ),
                 ),
-                child: Text(activityType.name),
+                child: Text(
+                  '${activityType.name} ${activityType.isArchived ? '(A)' : ''}',
+                ),
               ),
               const SizedBox(height: 15),
             ],

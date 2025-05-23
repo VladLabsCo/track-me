@@ -1,48 +1,32 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/infrastructure/hive/hive.dart';
 
+part 'activity_stats.freezed.dart';
 part 'activity_stats.g.dart';
 
-@HiveType(typeId: 4)
-class ActivityStats extends HiveObject implements HiveBoxDocument {
-  ActivityStats({
-    required this.id,
-    required this.activityTypeId,
-    required this.totalDuration,
-    this.lastUpdate,
-  });
+@freezed
+@HiveType(typeId: 1)
+abstract class ActivityStats extends HiveObject
+    with _$ActivityStats
+    implements HiveBoxDocument {
+  factory ActivityStats({
+    @override @HiveField(0) required String id,
+    @HiveField(1) required String activityTypeId,
+    @HiveField(2) required Duration totalDuration,
+    @HiveField(3) DateTime? lastUpdate,
+  }) = _ActivityStats;
 
-  factory ActivityStats.fromActivityTypeId(String miao) {
+  ActivityStats._();
+
+  factory ActivityStats.fromActivityTypeId(String activityTypeId) {
     return ActivityStats(
       id: tmUuid(),
-      activityTypeId: miao,
-      totalDuration: Duration.zero,
-      lastUpdate: DateTime.now(),
-    );
-  }
-
-  ActivityStats copyWithDuration(Duration duration) {
-    return ActivityStats(
-      id: id,
       activityTypeId: activityTypeId,
-      totalDuration: totalDuration + duration,
-      lastUpdate: DateTime.now(),
+      totalDuration: Duration.zero,
     );
   }
-
-  @override
-  @HiveField(0)
-  final String id;
-
-  @HiveField(1)
-  final String activityTypeId;
-
-  @HiveField(2)
-  final Duration totalDuration;
-
-  @HiveField(3)
-  final DateTime? lastUpdate;
 }
 
 class ActivityStatsCreateDto {

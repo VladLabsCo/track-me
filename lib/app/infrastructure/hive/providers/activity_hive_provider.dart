@@ -5,7 +5,7 @@ import 'package:track_me/app/infrastructure/hive/hive.dart';
 
 part 'activity_hive_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ActivityHive extends _$ActivityHive
     with HiveProviderMixin<Activity>
     implements HiveProviderBase<Activity, ActivityCreateDto, Activity> {
@@ -24,14 +24,15 @@ class ActivityHive extends _$ActivityHive
       date: activityCreateDto.date ?? DateTime.now(),
     );
 
-    await getBox().add(newActivity);
+    await getBox().put(newActivity.id, newActivity);
 
     return newActivity;
   }
 
   @override
-  Future<String> update(String id, Activity activity) async {
-    await getBox().putAt(getIndexFromId(id), activity);
-    return id;
+  Future<String> update(Activity activity) async {
+    await getBox().put(activity.id, activity);
+
+    return activity.id;
   }
 }

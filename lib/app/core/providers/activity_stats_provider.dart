@@ -22,9 +22,7 @@ class ActivityStatsNotifier extends _$ActivityStatsNotifier {
         return b.lastUpdate!.compareTo(a.lastUpdate!);
       });
 
-    return ActivityStatsState.inital(
-      stats,
-    );
+    return ActivityStatsState.inital(stats);
   }
 
   Future<void> registerTimer(String activityTypeId, Duration duration) async {
@@ -32,11 +30,16 @@ class ActivityStatsNotifier extends _$ActivityStatsNotifier {
         .read(activityStatsHiveProvider.notifier)
         .findByActivityTypeId(activityTypeId);
 
-    final updatedActivityState = activityStat.copyWithDuration(duration);
+    if (activityStat == null) return;
+
+    final updatedActivityState = activityStat.copyWith(
+      totalDuration: activityStat.totalDuration + duration,
+      lastUpdate: DateTime.now(),
+    );
 
     await ref
         .read(activityStatsHiveProvider.notifier)
-        .update(activityStat.id, updatedActivityState);
+        .update(updatedActivityState);
 
     return;
   }

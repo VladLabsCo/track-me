@@ -4,7 +4,7 @@ import 'package:track_me/app/infrastructure/hive/hive.dart';
 
 part 'activity_stats_hive_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ActivityStatsHive extends _$ActivityStatsHive
     with HiveProviderMixin<ActivityStats>
     implements
@@ -23,21 +23,23 @@ class ActivityStatsHive extends _$ActivityStatsHive
       activityStatsCreateDto.activityTypeId,
     );
 
-    await getBox().add(newActivityStats);
+    await getBox().put(newActivityStats.id, newActivityStats);
 
     return newActivityStats;
   }
 
   @override
-  Future<String> update(String id, ActivityStats activityStats) async {
-    await getBox().putAt(getIndexFromId(id), activityStats);
-    return id;
+  Future<String> update(ActivityStats activityStats) async {
+    await getBox().put(activityStats.id, activityStats);
+
+    return activityStats.id;
   }
 
-  ActivityStats findByActivityTypeId(String activityTypeId) {
+  ActivityStats? findByActivityTypeId(String activityTypeId) {
     final activityStat = getAll().firstWhere(
       (activityStat) => activityStat.activityTypeId == activityTypeId,
     );
-    return getBox().getAt(getIndexFromId(activityStat.id))!;
+
+    return getBox().get(activityStat.id);
   }
 }

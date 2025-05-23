@@ -1,29 +1,23 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:track_me/app/infrastructure/infrastructure.dart';
 
+part 'activity.freezed.dart';
 part 'activity.g.dart';
 
+@freezed
 @HiveType(typeId: 2)
-class Activity extends HiveObject implements HiveBoxDocument {
-  Activity({
-    required this.id,
-    required this.activityTypeId,
-    required this.duration,
-    required this.date,
-  });
+abstract class Activity extends HiveObject
+    with _$Activity
+    implements HiveBoxDocument {
+  factory Activity({
+    @override @HiveField(0) required String id,
+    @HiveField(1) required String activityTypeId,
+    @HiveField(2) required Duration duration,
+    @HiveField(3) required DateTime date,
+  }) = _Activity;
 
-  @override
-  @HiveField(0)
-  final String id;
-
-  @HiveField(1)
-  final String activityTypeId;
-
-  @HiveField(2)
-  final Duration duration;
-
-  @HiveField(3)
-  final DateTime date;
+  Activity._();
 }
 
 class ActivityCreateDto {

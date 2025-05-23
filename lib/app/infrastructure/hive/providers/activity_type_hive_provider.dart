@@ -5,7 +5,7 @@ import 'package:track_me/app/infrastructure/hive/hive.dart';
 
 part 'activity_type_hive_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ActivityTypeHive extends _$ActivityTypeHive
     with HiveProviderMixin<ActivityType>
     implements
@@ -22,17 +22,17 @@ class ActivityTypeHive extends _$ActivityTypeHive
       id: tmUuid(),
       name: activityCreateDto.name,
       icon: activityCreateDto.icon,
-      category: activityCreateDto.category,
     );
 
-    await getBox().add(activity);
+    await getBox().put(activity.id, activity);
 
     return activity;
   }
 
   @override
-  Future<String> update(String id, ActivityType activity) async {
-    await getBox().putAt(getIndexFromId(id), activity);
-    return id;
+  Future<String> update(ActivityType activity) async {
+    await getBox().put(activity.id, activity);
+
+    return activity.id;
   }
 }

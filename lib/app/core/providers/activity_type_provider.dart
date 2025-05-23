@@ -54,6 +54,14 @@ class ActivityTypeNotifier extends _$ActivityTypeNotifier {
     state = state.copyWith(active: activityType);
   }
 
+  Future<void> toggleIsArchived(ActivityType activityType) async {
+    await ref
+        .read(activityTypeHiveProvider.notifier)
+        .update(activityType.copyWith(isArchived: !activityType.isArchived));
+
+    getAll();
+  }
+
   void storeCurrentType() {
     _updateDiskValue(state.active);
   }

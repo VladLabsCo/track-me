@@ -42,7 +42,7 @@ abstract class HiveBoxDocument {
 abstract class HiveProviderBase<T extends HiveBoxDocument, X, Y> {
   Box<T> getBox();
   Future<T> create(X activityCreateDto);
-  Future<String> update(String id, Y activityUpdateDto);
+  Future<String> update(Y activityUpdateDto);
 }
 
 mixin HiveBoxAccessor<T extends HiveBoxDocument> {
@@ -53,13 +53,9 @@ mixin HiveProviderMixin<T extends HiveBoxDocument> implements HiveBoxAccessor {
   @override
   Box<T> getBox();
 
-  int getIndexFromId(String id) {
-    return getBox().values.toList().indexWhere((activity) => activity.id == id);
-  }
-
   List<T> getAll() => getBox().values.toList();
 
   Future<void> delete(String id) async {
-    await getBox().deleteAt(getIndexFromId(id));
+    await getBox().delete(id);
   }
 }
