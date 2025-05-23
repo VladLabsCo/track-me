@@ -29,7 +29,8 @@ class ManualActivityFormNotifier extends _$ManualActivityFormNotifier {
           ),
         );
 
-    ref.invalidate(activityStatsNotifierProvider);
-    ref.invalidate(activityNotifierProvider);
+    ref
+      ..invalidate(activityStatsNotifierProvider)
+      ..invalidate(activityNotifierProvider);
   }
 }
