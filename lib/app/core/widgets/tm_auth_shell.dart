@@ -36,13 +36,13 @@ class _TmAuthShellState extends ConsumerState<TmAuthShell> {
         });
       });
 
-      if (user is UnloggedUser) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          context.replace('/login');
-        });
-      }
-
       return TmLifecycleObserver(children: widget.child);
+    }
+
+    if (user is UnloggedUser) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.replace('/login');
+      });
     }
 
     return const Scaffold();
