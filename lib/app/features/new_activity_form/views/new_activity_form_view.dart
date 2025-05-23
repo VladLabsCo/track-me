@@ -41,6 +41,7 @@ class NewActivityFormView extends ConsumerWidget {
             width: double.infinity,
             child: TmButton(onPressed: handleSubmit, 'Save'),
           ),
+          const SizedBox(height: 30),
         ],
       ),
     );
