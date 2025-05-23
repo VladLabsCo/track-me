@@ -1,7 +1,5 @@
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:track_me/app/infrastructure/hive/adapters/datetime_adapter.dart';
-import 'package:track_me/app/infrastructure/hive/adapters/duration_adapter.dart';
 import 'package:track_me/app/infrastructure/hive/models/activity.dart';
 import 'package:track_me/app/infrastructure/hive/models/activity_stats.dart';
 import 'package:track_me/app/infrastructure/hive/models/activity_type.dart';
@@ -27,8 +25,6 @@ Future<void> initHive() async {
   await Hive.initFlutter((await getApplicationDocumentsDirectory()).path);
 
   Hive
-    ..registerAdapter(DurationAdapter())
-    ..registerAdapter(DatetimeAdapter())
     ..registerAdapter(ActivityAdapter())
     ..registerAdapter(ActivityTypeAdapter())
     ..registerAdapter(ActivityStatsAdapter());
