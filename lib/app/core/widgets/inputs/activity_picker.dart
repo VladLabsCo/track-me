@@ -19,7 +19,8 @@ class ActivityPicker extends ConsumerWidget {
       timerNotifierProvider.select((s) => s.clockState),
     );
     final activityTypeState = ref.watch(activityTypeNotifierProvider);
-    final activityTypes = activityTypeState.types;
+    final activityTypes =
+        activityTypeState.types.where((at) => !at.isArchived).toList();
     final activeType = activityTypeState.active;
 
     final activeIndex = activeType != null
