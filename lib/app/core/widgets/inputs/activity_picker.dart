@@ -97,7 +97,7 @@ class _ActivityPickerPopup extends StatefulWidget {
 }
 
 class _ActivityPickerPopupState extends State<_ActivityPickerPopup> {
-  late final initalIndex = widget.initialIndex ?? 0;
+  late final int initalIndex = widget.initialIndex ?? 0;
 
   late int _selectedItemIndex = initalIndex;
   late final FixedExtentScrollController _scrollController =
