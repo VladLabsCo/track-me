@@ -10,6 +10,7 @@ export 'models/timer_clock_state.dart';
 // Providers and states
 export 'providers/activity_provider.dart';
 export 'providers/activity_stats_provider.dart';
+export 'providers/activity_target_provider.dart';
 export 'providers/activity_type_provider.dart';
 export 'providers/state/timer_state.dart';
 export 'providers/timer_provider.dart';

@@ -3,6 +3,8 @@ linter:
   rules:
     public_member_api_docs: false
 analyzer:
+  errors:
+    flutter_style_todos: ignore
   plugins:
     - custom_lint
   exclude:
