@@ -63,31 +63,33 @@ class ActivityTypesList extends ConsumerWidget {
               const SizedBox(height: 15),
             ],
             const SizedBox(height: 15),
-            const Text('Archived activities:'),
-            const SizedBox(height: 20),
-            for (final activityType in archivedActivityTypes) ...[
-              TmCard(
-                actions: FilledButton(
-                  style: FilledButton.styleFrom(
-                    padding: const EdgeInsets.all(14),
-                    minimumSize: Size.zero,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    backgroundColor: Colors.transparent,
+            if (archivedActivityTypes.isNotEmpty) ...[
+              const Text('Archived activities:'),
+              const SizedBox(height: 20),
+              for (final activityType in archivedActivityTypes) ...[
+                TmCard(
+                  actions: FilledButton(
+                    style: FilledButton.styleFrom(
+                      padding: const EdgeInsets.all(14),
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      backgroundColor: Colors.transparent,
+                    ),
+                    onPressed: () => handleArchiveActivity(activityType),
+                    child: const Icon(
+                      CupertinoIcons.restart,
+                      size: 22,
+                    ),
                   ),
-                  onPressed: () => handleArchiveActivity(activityType),
-                  child: const Icon(
-                    CupertinoIcons.restart,
-                    size: 22,
+                  child: Text(
+                    activityType.name,
+                    style: const TextStyle(
+                      color: Color.fromARGB(255, 182, 182, 182),
+                    ),
                   ),
                 ),
-                child: Text(
-                  activityType.name,
-                  style: const TextStyle(
-                    color: Color.fromARGB(255, 182, 182, 182),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 15),
+                const SizedBox(height: 15),
+              ],
             ],
           ],
         ),
