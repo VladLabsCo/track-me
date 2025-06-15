@@ -10,20 +10,20 @@ class ManualActivityFormNotifier extends _$ManualActivityFormNotifier {
   @override
   ManualActivityFormState build() => ManualActivityFormState.initial();
 
+  void setType(ActivityType type) => state = state.copyWith(activityType: type);
+
   void setDate(DateTime value) => state = state.copyWith(date: value);
 
   void setDuration(Duration value) => state = state.copyWith(duration: value);
 
   Future<void> save() async {
-    final activityType = ref.read(activityTypeNotifierProvider).active;
-
     await ref
         .read(activityStatsNotifierProvider.notifier)
-        .registerTimer(activityType!.id, state.duration);
+        .registerTimer(state.activityType!.id, state.duration);
 
     await ref.read(activityHiveProvider.notifier).create(
           ActivityCreateDto(
-            activityTypeId: activityType.id,
+            activityTypeId: state.activityType!.id,
             duration: state.duration,
             date: state.date,
           ),

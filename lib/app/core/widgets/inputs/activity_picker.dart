@@ -8,10 +8,14 @@ import 'package:track_me/app/infrastructure/infrastructure.dart';
 class ActivityPicker extends ConsumerWidget {
   const ActivityPicker({
     this.forForm = false,
+    this.value,
+    this.onChanged,
     super.key,
   });
 
   final bool forForm;
+  final ActivityType? value;
+  final void Function(ActivityType activityType)? onChanged;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,7 +25,7 @@ class ActivityPicker extends ConsumerWidget {
     final activityTypeState = ref.watch(activityTypeNotifierProvider);
     final activityTypes =
         activityTypeState.types.where((at) => !at.isArchived).toList();
-    final activeType = activityTypeState.active;
+    final activeType = onChanged != null ? value : activityTypeState.active;
 
     final activeIndex = activeType != null
         ? activityTypes
@@ -42,7 +46,13 @@ class ActivityPicker extends ConsumerWidget {
         if (result.$1 && !forForm) {
           if (context.mounted) context.go('/new-type');
         } else {
-          ref.read(activityTypeNotifierProvider.notifier).setActive(result.$2);
+          if (onChanged != null) {
+            onChanged!(result.$2!);
+          } else {
+            ref
+                .read(activityTypeNotifierProvider.notifier)
+                .setActive(result.$2);
+          }
         }
       }
     }

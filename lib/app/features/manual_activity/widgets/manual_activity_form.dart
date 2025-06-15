@@ -11,8 +11,8 @@ class ManualActivityForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final formState = ref.watch(manualActivityFormNotifierProvider);
 
-    final canSubmit = formState.duration != Duration.zero &&
-        ref.watch(activityTypeNotifierProvider).active != null;
+    final canSubmit =
+        formState.duration != Duration.zero && formState.activityType != null;
 
     Future<void> handleSave() async {
       await ref.watch(manualActivityFormNotifierProvider.notifier).save();
@@ -25,7 +25,15 @@ class ManualActivityForm extends ConsumerWidget {
         const SizedBox(height: 10),
         const Text('Pick the activity'),
         const SizedBox(height: 10),
-        const ActivityPicker(forForm: true),
+        ActivityPicker(
+          forForm: true,
+          value: formState.activityType,
+          onChanged: ref
+              .watch(
+                manualActivityFormNotifierProvider.notifier,
+              )
+              .setType,
+        ),
         const SizedBox(height: 20),
         const Text('Select the date'),
         const SizedBox(height: 10),
