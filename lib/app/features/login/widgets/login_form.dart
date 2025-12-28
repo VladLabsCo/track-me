@@ -11,7 +11,7 @@ class LoginForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Future<void> handleLogin() async {
-      await ref.read(loginNotifierProvider.notifier).logIn();
+      await ref.read(loginProvider.notifier).logIn();
       if (context.mounted) context.replace('/');
     }
 
@@ -25,7 +25,7 @@ class LoginForm extends ConsumerWidget {
             CupertinoIcons.profile_circled,
             color: Colors.white,
           ),
-          onChanged: ref.watch(loginNotifierProvider.notifier).setName,
+          onChanged: ref.watch(loginProvider.notifier).setName,
         ),
         const SizedBox(height: 25),
         TmButton(

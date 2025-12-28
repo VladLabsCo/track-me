@@ -9,7 +9,7 @@ class TimerTime extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _TimerTimeConsumer(ref.watch(timerNotifierProvider));
+    return _TimerTimeConsumer(ref.watch(timerProvider));
   }
 }
 

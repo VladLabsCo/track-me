@@ -23,7 +23,7 @@ class ActivityForm extends _$ActivityForm {
         .read(activityStatsHiveProvider.notifier)
         .create(ActivityStatsCreateDto(activityTypeId: activityType.id));
 
-    ref.read(activityTypeNotifierProvider.notifier)
+    ref.read(activityTypeProvider.notifier)
       ..getAll()
       ..setActive(activityType);
 

@@ -12,6 +12,6 @@ class LoginNotifier extends _$LoginNotifier {
   void setName(String name) => state = state.copyWith(name: name);
 
   Future<void> logIn() async {
-    return ref.read(userNotifierProvider.notifier).logIn(state.name);
+    return ref.read(userProvider.notifier).logIn(state.name);
   }
 }

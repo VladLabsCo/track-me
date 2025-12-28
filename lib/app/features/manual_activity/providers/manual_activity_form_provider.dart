@@ -18,10 +18,12 @@ class ManualActivityFormNotifier extends _$ManualActivityFormNotifier {
 
   Future<void> save() async {
     await ref
-        .read(activityStatsNotifierProvider.notifier)
+        .read(activityStatsProvider.notifier)
         .registerTimer(state.activityType!.id, state.duration);
 
-    await ref.read(activityHiveProvider.notifier).create(
+    await ref
+        .read(activityHiveProvider.notifier)
+        .create(
           ActivityCreateDto(
             activityTypeId: state.activityType!.id,
             duration: state.duration,
@@ -30,7 +32,7 @@ class ManualActivityFormNotifier extends _$ManualActivityFormNotifier {
         );
 
     ref
-      ..invalidate(activityStatsNotifierProvider)
-      ..invalidate(activityNotifierProvider);
+      ..invalidate(activityStatsProvider)
+      ..invalidate(activityProvider);
   }
 }

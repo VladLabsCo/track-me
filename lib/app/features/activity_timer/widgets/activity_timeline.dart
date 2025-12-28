@@ -10,10 +10,10 @@ class ActivityTimeline extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final activities = ref.watch(
-      activityNotifierProvider.select((state) => state.activities),
+      activityProvider.select((state) => state.activities),
     );
     final activityTypes = ref.watch(
-      activityTypeNotifierProvider.select((state) => state.types),
+      activityTypeProvider.select((state) => state.types),
     );
 
     final groupedActivities = groupActivities(activities);

@@ -9,7 +9,7 @@ class ActivityTargetList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final activityTargets = ref.watch(activityTargetNotifierProvider).targets;
+    final activityTargets = ref.watch(activityTargetProvider).targets;
 
     return Expanded(
       child: SingleChildScrollView(
@@ -24,19 +24,17 @@ class ActivityTargetList extends ConsumerWidget {
                       angle: pi / 2.0,
                       child: Text(
                         ':(',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleSmall!
-                            .copyWith(color: Colors.white.withAlpha(180)),
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: Colors.white.withAlpha(180),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 10),
                     Text(
                       "You haven't set any target",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall!
-                          .copyWith(color: Colors.white.withAlpha(180)),
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: Colors.white.withAlpha(180),
+                      ),
                     ),
                   ],
                 ),
@@ -45,7 +43,7 @@ class ActivityTargetList extends ConsumerWidget {
               for (final target in activityTargets) ...[
                 Text(target.id),
                 const SizedBox(height: 15),
-              ]
+              ],
           ],
         ),
       ),

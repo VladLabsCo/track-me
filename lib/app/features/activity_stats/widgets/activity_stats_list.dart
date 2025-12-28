@@ -10,10 +10,10 @@ class ActivityStatsList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final types = ref.watch(
-      activityTypeNotifierProvider.select((s) => s.types),
+      activityTypeProvider.select((s) => s.types),
     );
     final stats = ref.watch(
-      activityStatsNotifierProvider.select((s) => s.stats),
+      activityStatsProvider.select((s) => s.stats),
     );
 
     final typesStatsRecords = <(ActivityType, ActivityStats)>[];

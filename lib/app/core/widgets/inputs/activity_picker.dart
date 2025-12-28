@@ -20,16 +20,18 @@ class ActivityPicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final timerState = ref.watch(
-      timerNotifierProvider.select((s) => s.clockState),
+      timerProvider.select((s) => s.clockState),
     );
-    final activityTypeState = ref.watch(activityTypeNotifierProvider);
-    final activityTypes =
-        activityTypeState.types.where((at) => !at.isArchived).toList();
+    final activityTypeState = ref.watch(activityTypeProvider);
+    final activityTypes = activityTypeState.types
+        .where((at) => !at.isArchived)
+        .toList();
     final activeType = onChanged != null ? value : activityTypeState.active;
 
     final activeIndex = activeType != null
-        ? activityTypes
-            .indexWhere((activityType) => activityType.id == activeType.id)
+        ? activityTypes.indexWhere(
+            (activityType) => activityType.id == activeType.id,
+          )
         : null;
 
     Future<void> showDialog() async {
@@ -49,9 +51,7 @@ class ActivityPicker extends ConsumerWidget {
           if (onChanged != null) {
             onChanged!(result.$2!);
           } else {
-            ref
-                .read(activityTypeNotifierProvider.notifier)
-                .setActive(result.$2);
+            ref.read(activityTypeProvider.notifier).setActive(result.$2);
           }
         }
       }
@@ -145,8 +145,8 @@ class _ActivityPickerPopupState extends State<_ActivityPickerPopup> {
                     ? 'No activities yet'
                     : "No activities yet. Tap 'Done' to add one.",
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: Colors.grey,
-                    ),
+                  color: Colors.grey,
+                ),
                 textAlign: TextAlign.center,
               ),
             ],

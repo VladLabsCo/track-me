@@ -20,12 +20,12 @@ class _TmAuthShellState extends ConsumerState<TmAuthShell> {
   void initState() {
     super.initState();
 
-    ref.read(userNotifierProvider.notifier).init();
+    ref.read(userProvider.notifier).init();
   }
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(userNotifierProvider);
+    final user = ref.watch(userProvider);
 
     if (user is LoggedUser) {
       WidgetsBinding.instance.addPostFrameCallback((_) {

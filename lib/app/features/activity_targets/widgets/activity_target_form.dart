@@ -8,19 +8,22 @@ class ActivityTargetForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final formState = ref.watch(activityTargetFormNotifierProvider);
-    final formNotifier = ref.watch(activityTargetFormNotifierProvider.notifier);
+    final formState = ref.watch(activityTargetFormProvider);
+    final formNotifier = ref.watch(activityTargetFormProvider.notifier);
 
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const SizedBox(height: 10),
-      const Text('Pick the activity'),
-      const SizedBox(height: 10),
-      ActivityPicker(
-        forForm: true,
-        value: formState.activityType,
-        onChanged: formNotifier.setType,
-      ),
-      const SizedBox(height: 20),
-    ]);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 10),
+        const Text('Pick the activity'),
+        const SizedBox(height: 10),
+        ActivityPicker(
+          forForm: true,
+          value: formState.activityType,
+          onChanged: formNotifier.setType,
+        ),
+        const SizedBox(height: 20),
+      ],
+    );
   }
 }

@@ -9,8 +9,9 @@ part 'activity_target_provider.g.dart';
 class ActivityTargetNotifier extends _$ActivityTargetNotifier {
   @override
   ActivityTargetState build() {
-    final activityTargets =
-        ref.read(activityTargetHiveProvider.notifier).getAll();
+    final activityTargets = ref
+        .read(activityTargetHiveProvider.notifier)
+        .getAll();
 
     _calculateCurrentWeekTargets(activityTargets);
 
@@ -21,8 +22,9 @@ class ActivityTargetNotifier extends _$ActivityTargetNotifier {
   }
 
   Future<void> _calculateCurrentWeekTargets(
-      List<ActivityTarget> activityTargets) async {
-    final activities = ref.read(activityNotifierProvider).activities;
+    List<ActivityTarget> activityTargets,
+  ) async {
+    final activities = ref.read(activityProvider).activities;
 
     final targetsProgress = <ActivityTarget, ActivityTargetProgress>{};
 

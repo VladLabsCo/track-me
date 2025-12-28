@@ -21,8 +21,8 @@ class _TmLifecycleObserverState extends ConsumerState<TmLifecycleObserver> {
 
     _listener = AppLifecycleListener(
       onResume: () {
-        ref.read(timerNotifierProvider.notifier).maybeResumeFromDisk();
-        ref.read(activityTypeNotifierProvider.notifier).maybeResumeFromDisk();
+        ref.read(timerProvider.notifier).maybeResumeFromDisk();
+        ref.read(activityTypeProvider.notifier).maybeResumeFromDisk();
       },
     );
   }

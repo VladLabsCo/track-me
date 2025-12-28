@@ -9,13 +9,13 @@ class ManualActivityForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final formState = ref.watch(manualActivityFormNotifierProvider);
+    final formState = ref.watch(manualActivityFormProvider);
 
     final canSubmit =
         formState.duration != Duration.zero && formState.activityType != null;
 
     Future<void> handleSave() async {
-      await ref.watch(manualActivityFormNotifierProvider.notifier).save();
+      await ref.watch(manualActivityFormProvider.notifier).save();
       if (context.mounted) context.pop();
     }
 
@@ -30,7 +30,7 @@ class ManualActivityForm extends ConsumerWidget {
           value: formState.activityType,
           onChanged: ref
               .watch(
-                manualActivityFormNotifierProvider.notifier,
+                manualActivityFormProvider.notifier,
               )
               .setType,
         ),
@@ -41,7 +41,7 @@ class ManualActivityForm extends ConsumerWidget {
           value: formState.date,
           onChanged: ref
               .watch(
-                manualActivityFormNotifierProvider.notifier,
+                manualActivityFormProvider.notifier,
               )
               .setDate,
         ),
@@ -52,7 +52,7 @@ class ManualActivityForm extends ConsumerWidget {
           value: formState.duration,
           onChanged: ref
               .watch(
-                manualActivityFormNotifierProvider.notifier,
+                manualActivityFormProvider.notifier,
               )
               .setDuration,
         ),

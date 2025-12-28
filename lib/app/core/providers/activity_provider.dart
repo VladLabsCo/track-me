@@ -4,7 +4,7 @@ import 'package:track_me/app/infrastructure/hive/providers/activity_hive_provide
 
 part 'activity_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ActivityNotifier extends _$ActivityNotifier {
   @override
   ActivityState build() {

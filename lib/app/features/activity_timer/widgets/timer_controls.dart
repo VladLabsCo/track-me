@@ -11,7 +11,7 @@ class TimerControls extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final clockState = ref.watch(
-      timerNotifierProvider.select((timer) => timer.clockState),
+      timerProvider.select((timer) => timer.clockState),
     );
 
     final isRunning = clockState == TimerClockState.running;
@@ -22,7 +22,7 @@ class TimerControls extends ConsumerWidget {
           id: 1,
           channelKey: 'ongoing_channel',
           title: 'Ongoing Activity',
-          body: ref.read(activityTypeNotifierProvider).active!.name,
+          body: ref.read(activityTypeProvider).active!.name,
           category: NotificationCategory.Reminder,
           autoDismissible: false,
           locked: true,
@@ -37,12 +37,12 @@ class TimerControls extends ConsumerWidget {
     void handlePlayPauseClick() {
       switch (clockState) {
         case TimerClockState.initial:
-          ref.read(timerNotifierProvider.notifier).start();
+          ref.read(timerProvider.notifier).start();
           createNotification();
         case TimerClockState.running:
-          ref.read(timerNotifierProvider.notifier).pause();
+          ref.read(timerProvider.notifier).pause();
         case TimerClockState.paused:
-          ref.read(timerNotifierProvider.notifier).resume();
+          ref.read(timerProvider.notifier).resume();
       }
     }
 
@@ -54,18 +54,18 @@ class TimerControls extends ConsumerWidget {
         deny: 'Nevermind...',
         accept: 'Yes!',
         onAccepted: () async {
-          final timerState = ref.read(timerNotifierProvider);
-          final activeType = ref.read(activityTypeNotifierProvider).active;
+          final timerState = ref.read(timerProvider);
+          final activeType = ref.read(activityTypeProvider).active;
 
-          ref.read(timerNotifierProvider.notifier).stop();
-          ref.read(activityTypeNotifierProvider.notifier).setActive(null);
+          ref.read(timerProvider.notifier).stop();
+          ref.read(activityTypeProvider.notifier).setActive(null);
 
           late Duration totalDuration;
 
           if (timerState.clockState == TimerClockState.running) {
             final totalDurationFull =
                 DateTime.now().difference(timerState.runDate!) +
-                    timerState.durationAtPause;
+                timerState.durationAtPause;
             totalDuration = Duration(
               days: totalDurationFull.inDays,
               hours: totalDurationFull.inHours % 24,
@@ -76,7 +76,9 @@ class TimerControls extends ConsumerWidget {
             totalDuration = timerState.durationAtPause;
           }
 
-          await ref.read(activityHiveProvider.notifier).create(
+          await ref
+              .read(activityHiveProvider.notifier)
+              .create(
                 ActivityCreateDto(
                   activityTypeId: activeType!.id,
                   duration: totalDuration,
@@ -84,10 +86,10 @@ class TimerControls extends ConsumerWidget {
               );
 
           await ref
-              .read(activityStatsNotifierProvider.notifier)
+              .read(activityStatsProvider.notifier)
               .registerTimer(activeType.id, totalDuration);
 
-          ref.invalidate(activityNotifierProvider);
+          ref.invalidate(activityProvider);
 
           await cancelNotification();
         },
@@ -102,8 +104,8 @@ class TimerControls extends ConsumerWidget {
         deny: 'Oops, go back',
         accept: 'Yes, cancel it!',
         onAccepted: () async {
-          ref.read(timerNotifierProvider.notifier).stop();
-          ref.read(activityTypeNotifierProvider.notifier).setActive(null);
+          ref.read(timerProvider.notifier).stop();
+          ref.read(activityTypeProvider.notifier).setActive(null);
           await cancelNotification();
         },
       );
@@ -128,7 +130,7 @@ class TimerControls extends ConsumerWidget {
         ),
         const SizedBox(width: 25),
         TmIconButton(
-          disabled: ref.watch(activityTypeNotifierProvider).active == null,
+          disabled: ref.watch(activityTypeProvider).active == null,
           shadowColor: Theme.of(context).primaryColor,
           onPressed: handlePlayPauseClick,
           child: Transform.translate(

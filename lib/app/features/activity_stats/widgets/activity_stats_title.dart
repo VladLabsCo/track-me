@@ -8,7 +8,7 @@ class ActivityStatsTitle extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userNotifierProvider);
+    final user = ref.watch(userProvider);
 
     late String userName;
     if (user is LoggedUser) {

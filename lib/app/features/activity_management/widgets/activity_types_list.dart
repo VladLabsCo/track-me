@@ -9,7 +9,7 @@ class ActivityTypesList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final activityTypeState = ref.watch(activityTypeNotifierProvider);
+    final activityTypeState = ref.watch(activityTypeProvider);
 
     final activeActivityTypes = <ActivityType>[];
     final archivedActivityTypes = <ActivityType>[];
@@ -25,15 +25,16 @@ class ActivityTypesList extends ConsumerWidget {
     Future<void> handleArchiveActivity(ActivityType activityType) async {
       await tmDialogConfirm(
         context: context,
-        title:
-            activityType.isArchived ? 'Restore activity' : 'Archive activity',
+        title: activityType.isArchived
+            ? 'Restore activity'
+            : 'Archive activity',
         subtitle: activityType.isArchived
             ? 'Are you sure you want to restore this activity?'
             : 'Are you sure you want to archive this activity?',
         deny: 'No',
         accept: 'Yes',
         onAccepted: () => ref
-            .watch(activityTypeNotifierProvider.notifier)
+            .watch(activityTypeProvider.notifier)
             .toggleIsArchived(activityType),
       );
     }
