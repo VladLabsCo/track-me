@@ -18,6 +18,7 @@ class DashboardView extends StatelessWidget {
           children: [
             ActivityTimerView(),
             ActivityStatsView(),
+            // ActivityTargetsView(),
           ],
         ),
         floatingActionButton: DashboardFab(),
@@ -25,6 +26,7 @@ class DashboardView extends StatelessWidget {
           items: [
             CupertinoIcons.timer,
             Icons.bar_chart_rounded,
+            // CupertinoIcons.bolt_fill,
           ],
         ),
       ),

@@ -13,6 +13,11 @@ class App extends StatelessWidget {
       theme: theme.copyWith(
         textTheme: GoogleFonts.latoTextTheme(theme.textTheme)
             .copyWith(
+              titleMedium: const TextStyle(
+                height: 1,
+                fontSize: 26,
+                fontWeight: FontWeight.w500,
+              ),
               titleSmall: const TextStyle(
                 height: 1,
                 fontSize: 22,

@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:track_me/app/core/widgets/tm_auth_shell.dart';
+import 'package:track_me/app/features/activity_targets/views/activity_target_form_view.dart';
 import 'package:track_me/app/features/features.dart';
 
 final router = GoRouter(
@@ -28,6 +29,10 @@ final router = GoRouter(
               path: 'new-manual-log',
               builder: (context, state) => const ManualActivityView(),
             ),
+            // GoRoute(
+            //   path: 'new-target',
+            //   builder: (context, state) => const ActivityTargetFormView(),
+            // ),
           ],
         ),
       ],

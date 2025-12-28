@@ -1,5 +1,6 @@
 export 'activity_management/views/activity_management_view.dart';
 export 'activity_stats/views/activity_stats_view.dart';
+export 'activity_targets/views/activity_targets_view.dart';
 export 'activity_timer/views/activity_timer_view.dart';
 export 'dashboard/views/dashboard_view.dart';
 export 'login/views/login_view.dart';

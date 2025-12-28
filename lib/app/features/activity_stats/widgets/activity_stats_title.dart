@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:track_me/app/core/core.dart';
 import 'package:track_me/app/core/providers/state/user_state.dart';
@@ -19,11 +19,7 @@ class ActivityStatsTitle extends ConsumerWidget {
 
     return Text(
       'Keep it up $userName!',
-      style: const TextStyle(
-        height: 1,
-        fontSize: 26,
-        fontWeight: FontWeight.w500,
-      ),
+      style: Theme.of(context).textTheme.titleMedium,
     );
   }
 }

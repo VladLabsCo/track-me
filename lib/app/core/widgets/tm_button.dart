@@ -12,6 +12,7 @@ class TmButton extends StatelessWidget {
     this.outlined = false,
     this.size = TmButtonSize.normal,
     this.padding,
+    this.leftIcon,
     this.rightIcon,
     super.key,
   });
@@ -21,6 +22,7 @@ class TmButton extends StatelessWidget {
   final bool outlined;
   final TmButtonSize size;
   final EdgeInsetsGeometry? padding;
+  final Widget? leftIcon;
   final Widget? rightIcon;
 
   @override
@@ -51,7 +53,7 @@ class TmButton extends StatelessWidget {
     return TextButton(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(12),
         ),
         side: side,
         elevation: 0,
@@ -65,6 +67,10 @@ class TmButton extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
+          if (leftIcon != null) ...[
+            leftIcon!,
+            const SizedBox(width: 4),
+          ],
           Text(
             label,
             style: textStyle,
