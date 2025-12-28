@@ -27,16 +27,18 @@ class TmButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor =
-        outlined ? Colors.transparent : Theme.of(context).primaryColor;
+    final backgroundColor = outlined
+        ? Colors.transparent
+        : Theme.of(context).colorScheme.primary;
 
     final side = outlined
         ? BorderSide(
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).colorScheme.primary,
           )
         : null;
 
-    var sizePadding = padding ??
+    var sizePadding =
+        padding ??
         const EdgeInsets.symmetric(
           horizontal: 25,
           vertical: 15,

@@ -27,9 +27,10 @@ class TmIconButton extends StatelessWidget {
     Widget buttonWidget = FilledButton(
       style: FilledButton.styleFrom(
         minimumSize: Size.zero,
-        backgroundColor: backgroundColor ?? Theme.of(context).primaryColor,
+        backgroundColor:
+            backgroundColor ?? Theme.of(context).colorScheme.primary,
         disabledBackgroundColor:
-            backgroundColor ?? Theme.of(context).primaryColor,
+            backgroundColor ?? Theme.of(context).colorScheme.primary,
         padding: EdgeInsets.all(padding ?? 20),
       ),
       onPressed: (disabled ?? false) ? null : onPressed,

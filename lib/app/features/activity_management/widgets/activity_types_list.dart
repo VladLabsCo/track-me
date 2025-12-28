@@ -57,6 +57,7 @@ class ActivityTypesList extends ConsumerWidget {
                   child: const Icon(
                     CupertinoIcons.archivebox,
                     size: 22,
+                    color: Colors.white,
                   ),
                 ),
                 child: Text(activityType.name),
@@ -80,6 +81,7 @@ class ActivityTypesList extends ConsumerWidget {
                     child: const Icon(
                       CupertinoIcons.restart,
                       size: 22,
+                      color: Colors.white,
                     ),
                   ),
                   child: Text(

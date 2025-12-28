@@ -57,11 +57,21 @@ class App extends StatelessWidget {
 }
 
 final theme = ThemeData(
-  primaryColor: const Color(0xFFF5004F),
   cardColor: const Color(0xFF202122),
   scaffoldBackgroundColor: const Color(0xFF0D0E0F),
   dialogTheme: const DialogThemeData(
     backgroundColor: Color(0xFF202122),
+  ),
+  colorScheme: const ColorScheme(
+    brightness: Brightness.dark,
+    primary: Color(0xFFF5004F),
+    onPrimary: Colors.black,
+    secondary: Color(0xFFF5004F),
+    onSecondary: Colors.black,
+    error: Colors.red,
+    onError: Colors.black,
+    surface: Color(0xFF0D0E0F),
+    onSurface: Colors.white,
   ),
   cupertinoOverrideTheme: const CupertinoThemeData(
     brightness: Brightness.dark,

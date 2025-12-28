@@ -131,7 +131,7 @@ class TimerControls extends ConsumerWidget {
         const SizedBox(width: 25),
         TmIconButton(
           disabled: ref.watch(activityTypeProvider).active == null,
-          shadowColor: Theme.of(context).primaryColor,
+          shadowColor: Theme.of(context).colorScheme.primary,
           onPressed: handlePlayPauseClick,
           child: Transform.translate(
             offset: Offset(isRunning ? 0 : 2.5, 0),

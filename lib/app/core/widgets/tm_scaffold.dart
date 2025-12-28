@@ -41,14 +41,21 @@ class TmScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    final appBar = AppBar(
+      toolbarHeight: 0,
+      backgroundColor: theme.scaffoldBackgroundColor,
+      surfaceTintColor: theme.scaffoldBackgroundColor,
+    );
+
     if (fullScreen) {
-      return Scaffold(body: body);
+      return Scaffold(appBar: appBar, body: body);
     }
 
-    final descriptionStyle = Theme.of(context)
-        .textTheme
-        .bodySmall!
-        .copyWith(color: Colors.white.withAlpha(180));
+    final descriptionStyle = Theme.of(
+      context,
+    ).textTheme.bodySmall!.copyWith(color: Colors.white.withAlpha(180));
 
     final heading = TmPadding(
       child: Column(
@@ -81,6 +88,7 @@ class TmScaffold extends StatelessWidget {
     );
 
     return Scaffold(
+      appBar: appBar,
       body: SafeArea(
         child: nested
             ? Column(

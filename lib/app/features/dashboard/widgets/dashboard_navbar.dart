@@ -65,7 +65,7 @@ class _DashboardNavbarItem extends StatelessWidget {
             iconData,
             size: 34,
             color: isActive
-                ? Theme.of(context).primaryColor
+                ? Theme.of(context).colorScheme.primary
                 : Colors.white.withAlpha(204),
           ),
         ),

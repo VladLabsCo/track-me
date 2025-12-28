@@ -13,7 +13,7 @@ class TmFab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
+    final primaryColor = Theme.of(context).colorScheme.primary;
 
     return FloatingActionButton(
       elevation: 0,

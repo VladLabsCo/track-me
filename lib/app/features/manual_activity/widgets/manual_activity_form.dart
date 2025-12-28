@@ -69,6 +69,7 @@ class ManualActivityForm extends ConsumerWidget {
             ),
           ),
         ),
+        const SizedBox(height: 30),
       ],
     );
   }
